@@ -83,10 +83,10 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
               <div
                 key={category.id}
                 onClick={() => handleCategoryClick(category.name)}
-                className={`group relative p-5 sm:p-6 rounded-2xl cursor-pointer transition-all duration-300 bg-white border flex flex-col justify-between ${
+                className={`group relative p-5 sm:p-6 rounded-2xl cursor-pointer transition-all duration-300 flex flex-col justify-between ${
                   isSelected
-                    ? 'border-blue-500 bg-blue-50/40 shadow-md shadow-blue-500/10 -translate-y-1'
-                    : 'border-slate-200/90 shadow-xs hover:border-blue-400 hover:shadow-md hover:-translate-y-1'
+                    ? 'border-2 border-blue-500 bg-blue-50/50 shadow-md shadow-blue-500/10 -translate-y-1'
+                    : 'liquid-glass-card hover:border-blue-400 hover:shadow-md hover:-translate-y-1'
                 }`}
               >
                 {/* Top Section: Icon & eBook Count */}

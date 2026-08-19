@@ -17,8 +17,8 @@ import { AuthModal } from './components/AuthModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
 export default function App() {
-  // Global States
-  const [currency, setCurrency] = useState<Currency>('USD');
+  // Global States (Default to Kenyan Shillings 100 KES as requested)
+  const [currency, setCurrency] = useState<Currency>('KES');
   const [cartItems, setCartItems] = useState<CartItem[]>([
     { book: BOOKS_DATA[0], quantity: 1, selectedFormat: 'PDF' },
   ]);

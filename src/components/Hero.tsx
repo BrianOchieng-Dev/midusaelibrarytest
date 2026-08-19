@@ -116,7 +116,7 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Key Statistics Grid */}
             <div className="pt-5 border-t border-slate-100 grid grid-cols-3 gap-3 max-w-lg mx-auto lg:mx-0">
-              <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs text-center lg:text-left">
+              <div className="p-3 rounded-2xl liquid-glass-card text-center lg:text-left transition-transform hover:-translate-y-0.5">
                 <p className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-sans">
                   10,000+
                 </p>
@@ -125,7 +125,7 @@ export const Hero: React.FC<HeroProps> = ({
                 </p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs text-center lg:text-left">
+              <div className="p-3 rounded-2xl liquid-glass-card text-center lg:text-left transition-transform hover:-translate-y-0.5">
                 <p className="text-xl sm:text-2xl font-extrabold text-blue-600 tracking-tight font-sans">
                   5,000+
                 </p>
@@ -134,12 +134,12 @@ export const Hero: React.FC<HeroProps> = ({
                 </p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs text-center lg:text-left">
+              <div className="p-3 rounded-2xl liquid-glass-card text-center lg:text-left transition-transform hover:-translate-y-0.5">
                 <p className="text-xl sm:text-2xl font-extrabold text-indigo-600 tracking-tight font-sans">
-                  24/7
+                  KSh 100
                 </p>
                 <p className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">
-                  Instant Access
+                  Universal Price
                 </p>
               </div>
             </div>

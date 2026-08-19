@@ -254,7 +254,7 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
               return (
                 <div
                   key={book.id}
-                  className="group relative rounded-2xl bg-white border border-slate-200/90 hover:border-blue-400 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1"
+                  className="group relative rounded-2xl liquid-glass-card hover:border-blue-400 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1"
                 >
                   {/* Top Cover Display Area */}
                   <div className="relative p-5 pb-2 flex items-center justify-center bg-gradient-to-b from-slate-50 to-white">
@@ -399,7 +399,7 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
               return (
                 <div
                   key={book.id}
-                  className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-400 transition-all flex flex-col md:flex-row gap-4 items-start md:items-center justify-between shadow-xs hover:shadow-sm"
+                  className="p-4 sm:p-5 rounded-2xl liquid-glass-card hover:border-blue-400 transition-all flex flex-col md:flex-row gap-4 items-start md:items-center justify-between shadow-xs hover:shadow-sm"
                 >
                   <div className="flex gap-4 items-start">
                     <div 
