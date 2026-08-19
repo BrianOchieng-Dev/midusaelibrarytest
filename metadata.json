@@ -1,0 +1,6 @@
+{
+  "name": "MidusaElibrary",
+  "description": "Modern digital bookstore offering premium eBooks in Self Development, Business, Psychology, Finance, and Entrepreneurship.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
