@@ -2,15 +2,11 @@ import React from 'react';
 import { BookCategory } from '../types';
 import { CATEGORIES } from '../data/booksData';
 import { 
-  Code2, 
-  Cpu, 
   Briefcase, 
   TrendingUp, 
   Sparkles, 
   Brain, 
-  Target, 
   Rocket, 
-  GraduationCap, 
   ArrowRight,
   BookOpen
 } from 'lucide-react';
@@ -28,10 +24,6 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
 }) => {
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Code2':
-        return <Code2 className="w-5 h-5" />;
-      case 'Cpu':
-        return <Cpu className="w-5 h-5" />;
       case 'Briefcase':
         return <Briefcase className="w-5 h-5" />;
       case 'TrendingUp':
@@ -40,12 +32,8 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
         return <Sparkles className="w-5 h-5" />;
       case 'Brain':
         return <Brain className="w-5 h-5" />;
-      case 'Target':
-        return <Target className="w-5 h-5" />;
       case 'Rocket':
         return <Rocket className="w-5 h-5" />;
-      case 'GraduationCap':
-        return <GraduationCap className="w-5 h-5" />;
       default:
         return <BookOpen className="w-5 h-5" />;
     }
@@ -57,70 +45,61 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
   };
 
   return (
-    <section id="categories" className="py-14 sm:py-20 relative overflow-hidden bg-slate-50/70 border-y border-slate-100">
+    <section id="categories" className="py-12 sm:py-16 relative bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-xs font-semibold text-blue-700 mb-2.5">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>Curated Knowledge Domains</span>
-          </div>
-          
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Explore Premium Knowledge Categories
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Browse by Domain
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 mt-2 max-w-xl mx-auto leading-relaxed">
-            High-leverage blueprints, academic textbooks, and transformative guides written by industry leaders.
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Explore focused PDF collections across 5 essential fields.
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {CATEGORIES.map((category) => {
             const isSelected = selectedCategory === category.name;
             return (
               <div
                 key={category.id}
                 onClick={() => handleCategoryClick(category.name)}
-                className={`group relative p-5 sm:p-6 rounded-2xl cursor-pointer transition-all duration-300 flex flex-col justify-between ${
+                className={`p-5 rounded-2xl cursor-pointer transition-all flex flex-col justify-between ${
                   isSelected
-                    ? 'border-2 border-blue-500 bg-blue-50/50 shadow-md shadow-blue-500/10 -translate-y-1'
-                    : 'liquid-glass-card hover:border-blue-400 hover:shadow-md hover:-translate-y-1'
+                    ? 'border-2 border-blue-600 bg-blue-50/40 shadow-xs'
+                    : 'bg-slate-50 border border-slate-200 hover:border-blue-300 hover:bg-white'
                 }`}
               >
-                {/* Top Section: Icon & eBook Count */}
-                <div className="relative z-10 flex items-start justify-between mb-3.5">
-                  <div 
-                    className="p-3 rounded-xl shadow-xs transition-transform group-hover:scale-105 duration-300"
-                    style={{ 
-                      backgroundColor: `${category.accentColor}15`, 
-                      border: `1px solid ${category.accentColor}35`,
-                      color: category.accentColor 
-                    }}
-                  >
-                    {getCategoryIcon(category.iconName)}
+                <div>
+                  <div className="flex items-start justify-between mb-3">
+                    <div 
+                      className="p-2.5 rounded-xl flex items-center justify-center"
+                      style={{ 
+                        backgroundColor: `${category.accentColor}15`, 
+                        color: category.accentColor 
+                      }}
+                    >
+                      {getCategoryIcon(category.iconName)}
+                    </div>
+
+                    <span className="text-xs font-mono font-bold text-blue-600 bg-white px-2 py-0.5 rounded-lg border border-slate-200">
+                      KSh 100
+                    </span>
                   </div>
 
-                  <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600 group-hover:text-blue-700 transition-colors">
-                    {category.count.toLocaleString()} eBooks
-                  </span>
-                </div>
-
-                {/* Body: Title & Description */}
-                <div className="relative z-10 space-y-1.5 mb-3.5">
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1">
                     {category.name}
                   </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                  <p className="text-xs text-slate-500 line-clamp-2">
                     {category.description}
                   </p>
                 </div>
 
-                {/* Bottom Action Link */}
-                <div className="relative z-10 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500 group-hover:text-blue-600 transition-colors">
-                  <span>Browse {category.name}</span>
-                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                <div className="pt-3 mt-3 border-t border-slate-200/60 flex items-center justify-between text-xs font-semibold text-slate-600 group-hover:text-blue-600">
+                  <span>View Books</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </div>
             );

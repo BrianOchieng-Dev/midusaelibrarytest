@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Book, BookCategory, CartItem, Currency, UserProfile } from './types';
+import React, { useState } from 'react';
+import { Book, BookCategory, CartItem, UserProfile } from './types';
 import { BOOKS_DATA } from './data/booksData';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -17,8 +17,7 @@ import { AuthModal } from './components/AuthModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
 export default function App() {
-  // Global States (Default to Kenyan Shillings 100 KES as requested)
-  const [currency, setCurrency] = useState<Currency>('KES');
+  // Global States (Kenyan Shillings 100 KES standard)
   const [cartItems, setCartItems] = useState<CartItem[]>([
     { book: BOOKS_DATA[0], quantity: 1, selectedFormat: 'PDF' },
   ]);
@@ -33,7 +32,7 @@ export default function App() {
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
-  // User Auth Profile
+  // User Auth Profile (Google / Facebook)
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
   // Cart Operations
@@ -104,7 +103,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-blue-500/20 selection:text-blue-700">
       
-      {/* Top Glassmorphic Navigation Bar */}
+      {/* Top Navigation Bar with Mobile Placement */}
       <Navbar
         cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
         wishlistCount={wishlistIds.length}
@@ -114,8 +113,6 @@ export default function App() {
         onSelectCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
         currentUser={currentUser}
-        currency={currency}
-        onChangeCurrency={setCurrency}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         onScrollToSection={handleScrollToSection}
@@ -123,23 +120,22 @@ export default function App() {
 
       {/* Main Content Areas */}
       <main className="flex-1">
-        {/* 1. Hero Section with 3D Floating Book Mockups & Live Stats */}
+        {/* 1. Hero Section */}
         <Hero
           featuredBooks={BOOKS_DATA}
           onBrowseBooks={() => handleScrollToSection('catalog')}
           onPreviewBook={handleOpenPreview}
           onAddToCart={handleAddToCart}
-          currency={currency}
         />
 
-        {/* 2. Category Exploration Grid with Hover Glows */}
+        {/* 2. Categories Section */}
         <CategoriesSection
           onSelectCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
           onScrollToCatalog={() => handleScrollToSection('catalog')}
         />
 
-        {/* 3. Featured Books Catalog with Live Search, Filter, Sort & 3D Cards */}
+        {/* 3. Featured Books Catalog */}
         <FeaturedBooks
           books={BOOKS_DATA}
           selectedCategory={selectedCategory}
@@ -150,19 +146,18 @@ export default function App() {
           onAddToCart={handleAddToCart}
           onToggleWishlist={handleToggleWishlist}
           wishlistIds={wishlistIds}
-          currency={currency}
         />
 
-        {/* 4. Why Choose MidusaElibrary Feature Matrix */}
+        {/* 4. Why Choose MidusaElibrary */}
         <WhyChooseUs />
 
-        {/* 5. Verified Reader Testimonials */}
+        {/* 5. Reader Testimonials */}
         <Testimonials />
 
         {/* 6. Frequently Asked Questions */}
         <FaqSection />
 
-        {/* 7. Newsletter & 20% Coupon Unlock */}
+        {/* 7. Newsletter */}
         <Newsletter />
       </main>
 
@@ -172,13 +167,12 @@ export default function App() {
         onScrollToSection={handleScrollToSection}
       />
 
-      {/* Interactive eBook Preview & Sample Reader Modal */}
+      {/* eBook Details Modal */}
       <BookPreviewModal
         book={previewBook}
         isOpen={isPreviewOpen}
         onClose={() => setIsPreviewOpen(false)}
         onAddToCart={handleAddToCart}
-        currency={currency}
       />
 
       {/* Slide-over Cart & Checkout Drawer */}
@@ -189,7 +183,6 @@ export default function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveFromCart}
         onClearCart={handleClearCart}
-        currency={currency}
       />
 
       {/* Slide-over Wishlist Drawer */}
@@ -199,20 +192,18 @@ export default function App() {
         wishlistBooks={wishlistBooks}
         onRemoveWishlist={handleRemoveWishlist}
         onAddToCart={handleAddToCart}
-        currency={currency}
       />
 
-      {/* Auth & User Library Modal */}
+      {/* Auth Modal (Google & Facebook) */}
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
         currentUser={currentUser}
         onLogin={setCurrentUser}
         onLogout={() => setCurrentUser(null)}
-        books={BOOKS_DATA}
       />
 
-      {/* Special Feature: Floating WhatsApp Concierge & Instant Order Button */}
+      {/* Floating WhatsApp Button */}
       <FloatingWhatsApp currentBookTitle={previewBook?.title || BOOKS_DATA[0]?.title} />
 
     </div>

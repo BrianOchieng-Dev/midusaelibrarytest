@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { CartItem, Currency } from '../types';
+import React, { useState, useEffect } from 'react';
+import { CartItem } from '../types';
 import { formatPrice, generateCartWhatsAppUrl } from '../utils/helpers';
 import { BookCover } from './BookCover';
 import { 
@@ -9,11 +9,11 @@ import {
   Minus, 
   ShoppingBag, 
   ArrowRight, 
-  ShieldCheck, 
-  Tag, 
   MessageSquare, 
   CheckCircle2, 
-  Lock
+  Lock,
+  Download,
+  AlertCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -24,7 +24,6 @@ interface CartDrawerProps {
   onUpdateQuantity: (bookId: string, quantity: number) => void;
   onRemoveItem: (bookId: string) => void;
   onClearCart: () => void;
-  currency: Currency;
 }
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({
@@ -34,46 +33,26 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onUpdateQuantity,
   onRemoveItem,
   onClearCart,
-  currency,
 }) => {
-  const [promoCode, setPromoCode] = useState('');
-  const [discountPercent, setDiscountPercent] = useState(0);
-  const [promoMessage, setPromoMessage] = useState<{ text: string; isError?: boolean } | null>(null);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [checkoutCompleted, setCheckoutCompleted] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  const rawSubtotalUSD = items.reduce((acc, item) => acc + item.book.priceUSD * item.quantity, 0);
-  const discountAmountUSD = (rawSubtotalUSD * discountPercent) / 100;
-  const finalTotalUSD = Math.max(0, rawSubtotalUSD - discountAmountUSD);
-
-  const handleApplyPromo = (e: React.FormEvent) => {
-    e.preventDefault();
-    const clean = promoCode.trim().toUpperCase();
-    if (clean === 'MIDUSA20' || clean === 'ELEVATE') {
-      setDiscountPercent(20);
-      setPromoMessage({ text: '🎉 20% Discount applied successfully!' });
-      confetti({
-        particleCount: 30,
-        spread: 50,
-        origin: { y: 0.6 },
-        colors: ['#00F2FE', '#1E90FF', '#8B5CF6'],
-      });
-    } else if (clean === 'STUDENT50') {
-      setDiscountPercent(50);
-      setPromoMessage({ text: '🎓 Student 50% Special applied!' });
-      confetti({
-        particleCount: 50,
-        spread: 70,
-        origin: { y: 0.6 },
-      });
-    } else if (clean === '') {
-      setPromoMessage({ text: 'Please enter a coupon code', isError: true });
-    } else {
-      setPromoMessage({ text: 'Invalid promo code. Try "MIDUSA20"', isError: true });
-    }
-  };
+  const totalKES = items.reduce((acc, item) => acc + item.book.priceKES * item.quantity, 0);
 
   const handleProcessOrder = () => {
     setIsCheckingOut(true);
@@ -81,12 +60,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       setIsCheckingOut(false);
       setCheckoutCompleted(true);
       confetti({
-        particleCount: 80,
-        spread: 80,
+        particleCount: 70,
+        spread: 70,
         origin: { y: 0.5 },
-        colors: ['#00F2FE', '#1E90FF', '#10B981', '#8B5CF6'],
+        colors: ['#00F2FE', '#1E90FF', '#10B981'],
       });
-    }, 1200);
+    }, 1000);
   };
 
   const resetAndClose = () => {
@@ -101,28 +80,30 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+        className="absolute inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity animate-fadeIn"
         onClick={resetAndClose}
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white border-l border-slate-200 shadow-2xl flex flex-col z-50">
+        <div className="w-screen max-w-md bg-white border-l border-slate-200 shadow-2xl flex flex-col z-50 animate-slideLeft">
+          
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
-            <div className="flex items-center gap-2.5">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
+            <div className="flex items-center gap-2">
               <div className="p-2 rounded-xl bg-blue-100 text-blue-600">
-                <ShoppingBag className="w-5 h-5" />
+                <ShoppingBag className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 text-base">Your Library Cart</h3>
+                <h3 className="font-bold text-slate-900 text-sm">Shopping Cart</h3>
                 <p className="text-xs text-slate-500">
-                  {items.length} {items.length === 1 ? 'eBook' : 'eBooks'} selected
+                  {items.length} {items.length === 1 ? 'book' : 'books'} selected
                 </p>
               </div>
             </div>
             <button
               onClick={resetAndClose}
-              className="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors"
+              title="Close Cart (Esc)"
             >
               <X className="w-5 h-5" />
             </button>
@@ -131,14 +112,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           {/* Cart Content / Checkout Success */}
           {checkoutCompleted ? (
             <div className="flex-1 p-6 flex flex-col items-center justify-center text-center">
-              <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3">
-                <CheckCircle2 className="w-8 h-8" />
+              <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3">
+                <CheckCircle2 className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-1">
-                Order Confirmed!
+              <h3 className="text-lg font-bold text-slate-900 mb-1">
+                Order Successful!
               </h3>
               <p className="text-xs text-slate-600 mb-5">
-                Your instant digital download links have been generated and sent to your email.
+                Your PDF download links are ready.
               </p>
 
               <div className="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 text-left mb-5 space-y-2">
@@ -148,162 +129,162 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 </div>
                 <div className="flex justify-between text-xs text-slate-500">
                   <span>Delivery:</span>
-                  <span className="text-emerald-600 font-semibold">Instant Digital PDF Download</span>
+                  <span className="text-emerald-600 font-semibold">Instant PDF</span>
                 </div>
                 <div className="flex justify-between text-xs text-slate-500">
                   <span>Total Paid:</span>
-                  <span className="text-slate-900 font-bold">{formatPrice(finalTotalUSD, currency)}</span>
+                  <span className="text-slate-900 font-bold">{formatPrice(totalKES)}</span>
                 </div>
               </div>
 
-              <div className="w-full space-y-2.5">
-                <a
-                  href={generateCartWhatsAppUrl(items, finalTotalUSD, currency)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2 shadow-sm transition-colors"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Open WhatsApp Delivery Backup</span>
-                </a>
+              <div className="w-full space-y-2">
                 <button
                   onClick={resetAndClose}
-                  className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2 shadow-xs"
                 >
-                  Continue Browsing eBooks
+                  <Download className="w-4 h-4" />
+                  <span>Download PDF eBooks</span>
+                </button>
+
+                <button
+                  onClick={resetAndClose}
+                  className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs bg-slate-100 hover:bg-slate-200 text-slate-700"
+                >
+                  Continue Browsing
                 </button>
               </div>
             </div>
           ) : items.length === 0 ? (
             <div className="flex-1 p-6 flex flex-col items-center justify-center text-center">
               <div className="w-14 h-14 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-3">
-                <ShoppingBag className="w-6 h-6" />
+                <ShoppingBag className="w-7 h-7" />
               </div>
-              <h4 className="text-base font-bold text-slate-900 mb-1">Your cart is empty</h4>
+              <h4 className="text-base font-bold text-slate-800 mb-1">
+                Your cart is empty
+              </h4>
               <p className="text-xs text-slate-500 max-w-xs mb-5">
-                Explore our curated collection of best-selling PDF eBooks in Self Development, Business, Psychology, Finance, and Entrepreneurship.
+                Explore our bestsellers in Self Development, Business, Psychology, Finance, and Entrepreneurship for KSh 100 each.
               </p>
               <button
                 onClick={onClose}
-                className="px-5 py-2.5 rounded-xl font-semibold text-xs bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-transform active:scale-95"
+                className="px-5 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-xs"
               >
-                Browse Featured eBooks
+                Browse Books
               </button>
             </div>
           ) : (
             <>
               {/* Item List */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3.5">
+              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                
+                {/* Clear Cart Confirmation Header */}
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <span className="text-xs text-slate-500 font-medium">Selected eBooks</span>
+                  {showClearConfirm ? (
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] text-rose-600 font-medium">Clear all?</span>
+                      <button
+                        onClick={() => {
+                          onClearCart();
+                          setShowClearConfirm(false);
+                        }}
+                        className="text-[11px] font-bold text-rose-600 hover:underline"
+                      >
+                        Yes
+                      </button>
+                      <button
+                        onClick={() => setShowClearConfirm(false)}
+                        className="text-[11px] text-slate-500 hover:underline"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowClearConfirm(true)}
+                      className="text-xs text-slate-400 hover:text-rose-600 flex items-center gap-1 transition-colors"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Clear</span>
+                    </button>
+                  )}
+                </div>
+
+                {/* Items */}
                 {items.map((item) => (
                   <div
                     key={item.book.id}
-                    className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-all flex gap-3.5"
+                    className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex gap-3 items-center"
                   >
-                    <BookCover book={item.book} size="sm" showBadge={false} className="shrink-0 !w-[64px] !h-[88px]" />
-                    
-                    <div className="flex-1 min-w-0 flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-start justify-between gap-1">
-                          <h4 className="font-semibold text-xs sm:text-sm text-slate-900 line-clamp-1">
-                            {item.book.title}
-                          </h4>
-                          <button
-                            onClick={() => onRemoveItem(item.book.id)}
-                            className="text-slate-400 hover:text-rose-600 transition-colors p-1"
-                            title="Remove from cart"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                        <p className="text-[11px] text-slate-500 truncate">
-                          {item.book.author}
-                        </p>
-                        <span className="inline-block mt-1 text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
-                          {item.selectedFormat} Format
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-200">
-                        <span className="font-bold text-xs text-slate-900">
-                          {formatPrice(item.book.priceUSD * item.quantity, currency)}
-                        </span>
-
-                        <div className="flex items-center gap-1.5 bg-white rounded-lg p-0.5 border border-slate-200 shadow-xs">
-                          <button
-                            onClick={() => onUpdateQuantity(item.book.id, item.quantity - 1)}
-                            className="p-1 text-slate-500 hover:text-slate-900 rounded hover:bg-slate-100 transition-colors"
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="text-xs font-mono font-bold text-slate-800 px-1">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => onUpdateQuantity(item.book.id, item.quantity + 1)}
-                            className="p-1 text-slate-500 hover:text-slate-900 rounded hover:bg-slate-100 transition-colors"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
+                    <div className="w-12 shrink-0">
+                      <BookCover book={item.book} size="sm" showBadge={false} />
                     </div>
-                  </div>
-                ))}
 
-                {/* Promo Code Form */}
-                <form onSubmit={handleApplyPromo} className="pt-1">
-                  <div className="flex gap-2">
-                    <div className="relative flex-1">
-                      <Tag className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                      <input
-                        type="text"
-                        placeholder="Discount code (e.g. MIDUSA20)"
-                        value={promoCode}
-                        onChange={(e) => setPromoCode(e.target.value)}
-                        className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-500 uppercase tracking-wider"
-                      />
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-xs font-bold text-slate-900 truncate">
+                        {item.book.title}
+                      </h4>
+                      <p className="text-[10px] text-slate-500 truncate">
+                        {item.book.author}
+                      </p>
+                      <p className="text-xs font-bold text-blue-600 mt-1">
+                        {formatPrice(item.book.priceKES * item.quantity)}
+                      </p>
                     </div>
+
+                    {/* Quantity Controls */}
+                    <div className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-0.5">
+                      <button
+                        onClick={() => onUpdateQuantity(item.book.id, item.quantity - 1)}
+                        className="p-1 text-slate-500 hover:text-slate-900 rounded"
+                        title="Decrease"
+                      >
+                        <Minus className="w-3 h-3" />
+                      </button>
+                      <span className="w-5 text-center text-xs font-bold text-slate-800">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => onUpdateQuantity(item.book.id, item.quantity + 1)}
+                        className="p-1 text-slate-500 hover:text-slate-900 rounded"
+                        title="Increase"
+                      >
+                        <Plus className="w-3 h-3" />
+                      </button>
+                    </div>
+
+                    {/* Remove item button */}
                     <button
-                      type="submit"
-                      className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-900 text-white transition-colors"
+                      onClick={() => onRemoveItem(item.book.id)}
+                      className="p-1 text-slate-400 hover:text-rose-600 rounded"
+                      title="Remove item"
                     >
-                      Apply
+                      <X className="w-4 h-4" />
                     </button>
                   </div>
-                  {promoMessage && (
-                    <p className={`text-xs mt-1.5 ${promoMessage.isError ? 'text-rose-600' : 'text-emerald-600'}`}>
-                      {promoMessage.text}
-                    </p>
-                  )}
-                </form>
+                ))}
               </div>
 
               {/* Checkout Calculation & Actions */}
-              <div className="p-4 sm:p-6 bg-slate-50 border-t border-slate-200 space-y-3.5">
+              <div className="p-4 sm:p-5 bg-slate-50 border-t border-slate-200 space-y-3">
                 <div className="space-y-1 text-xs">
                   <div className="flex justify-between text-slate-500">
-                    <span>Subtotal</span>
-                    <span className="text-slate-800">{formatPrice(rawSubtotalUSD, currency)}</span>
+                    <span>Format</span>
+                    <span className="text-slate-800 font-medium">Digital PDF</span>
                   </div>
-                  {discountPercent > 0 && (
-                    <div className="flex justify-between text-emerald-600 font-medium">
-                      <span>Promo Discount ({discountPercent}%)</span>
-                      <span>-{formatPrice(discountAmountUSD, currency)}</span>
-                    </div>
-                  )}
                   <div className="flex justify-between text-slate-500">
-                    <span>Digital Delivery</span>
-                    <span className="text-emerald-600 font-medium">FREE Instant Download</span>
+                    <span>Delivery</span>
+                    <span className="text-emerald-600 font-medium">Instant Download</span>
                   </div>
                   <div className="flex justify-between text-sm sm:text-base font-bold text-slate-900 pt-2 border-t border-slate-200">
                     <span>Total Amount</span>
-                    <span className="text-blue-600">{formatPrice(finalTotalUSD, currency)}</span>
+                    <span className="text-blue-600">{formatPrice(totalKES)}</span>
                   </div>
                 </div>
 
                 {/* Direct WhatsApp Instant Buy Button */}
                 <a
-                  href={generateCartWhatsAppUrl(items, finalTotalUSD, currency)}
+                  href={generateCartWhatsAppUrl(items, totalKES)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2 shadow-xs transition-transform active:scale-95"
@@ -316,32 +297,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <button
                   onClick={handleProcessOrder}
                   disabled={isCheckingOut}
-                  className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 shadow-md shadow-blue-500/20 transition-all active:scale-95 disabled:opacity-50"
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95 disabled:opacity-50"
                 >
                   {isCheckingOut ? (
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      <span>Generating Delivery Tokens...</span>
+                      <span>Processing...</span>
                     </div>
                   ) : (
                     <>
                       <Lock className="w-4 h-4" />
-                      <span>Instant Secure Checkout</span>
+                      <span>Instant Checkout</span>
                       <ArrowRight className="w-4 h-4 ml-auto" />
                     </>
                   )}
                 </button>
-
-                <div className="flex items-center justify-center gap-3 text-[10px] text-slate-500 pt-0.5">
-                  <span className="flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    256-Bit Encrypted
-                  </span>
-                  <span>•</span>
-                  <span>DRM-Free PDF/ePub</span>
-                  <span>•</span>
-                  <span>30-Day Guarantee</span>
-                </div>
               </div>
             </>
           )}

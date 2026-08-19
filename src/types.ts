@@ -5,36 +5,18 @@ export type BookCategory =
   | 'Finance'
   | 'Entrepreneurship';
 
-export type BookFormat = 'PDF';
-
-export interface Chapter {
-  number: number;
-  title: string;
-  pages: string;
-  excerpt: string;
-}
-
 export interface Book {
   id: string;
   title: string;
   subtitle: string;
   author: string;
-  authorBio: string;
-  authorRole: string;
-  priceUSD: number;
-  originalPriceUSD: number;
+  priceKES: number; // Flat 100 KSh
+  originalPriceKES: number;
   rating: number;
   reviewsCount: number;
   category: BookCategory;
-  formats: BookFormat[];
   pages: number;
-  readingTime: string;
-  publicationYear: number;
-  language: string;
-  isbn: string;
-  fileSizeBytes: string;
-  badge?: 'BESTSELLER' | 'NEW ARRIVAL' | 'TRENDING' | 'STAFF PICK' | 'TOP RATED';
-  hasFreeSample: boolean;
+  fileSize: string;
   coverGradient: {
     from: string;
     via?: string;
@@ -44,10 +26,6 @@ export interface Book {
   coverPattern: string;
   description: string;
   keyTakeaways: string[];
-  tableOfContents: Chapter[];
-  audioExcerptDuration?: string;
-  audioSampleText?: string;
-  sampleSnippet: string;
 }
 
 export interface CategoryInfo {
@@ -64,7 +42,6 @@ export interface CategoryInfo {
 export interface CartItem {
   book: Book;
   quantity: number;
-  selectedFormat: BookFormat;
 }
 
 export interface Testimonial {
@@ -84,8 +61,5 @@ export interface UserProfile {
   name: string;
   email: string;
   avatar: string;
-  purchasedBookIds: string[];
-  wishlistIds: string[];
+  provider: 'google' | 'facebook' | 'email';
 }
-
-export type Currency = 'USD' | 'KES' | 'EUR' | 'GBP';
