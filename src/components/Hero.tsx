@@ -39,10 +39,10 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Left Column: Copywriting & CTAs */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-4 sm:space-y-5">
             
-            {/* Slogan Pill */}
+            {/* Tag Pill */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-sm shadow-md border border-slate-800">
               <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
-              <span className="font-subheading font-semibold text-slate-100">Knowledge should not be that expensive</span>
+              <span className="font-subheading font-semibold text-slate-100">Curated Digital Library • Verified PDF Editions</span>
             </div>
 
             {/* Main Headline -> SF Pro Display Bold */}
@@ -55,7 +55,7 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Concise Subheadline -> Outfit SemiBold / Inter */}
             <p className="text-base sm:text-lg text-slate-600 font-body font-normal max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Explore handpicked titles across <span className="font-subheading font-semibold text-slate-900">Self Development</span>, <span className="font-subheading font-semibold text-slate-900">Business</span>, <span className="font-subheading font-semibold text-slate-900">Psychology</span>, <span className="font-subheading font-semibold text-slate-900">Finance</span>, and <span className="font-subheading font-semibold text-slate-900">Entrepreneurship</span>. Instant M-Pesa prompt and unique download links sent directly to your account.
+              Explore handpicked titles across <span className="font-subheading font-semibold text-slate-900">Self Development</span>, <span className="font-subheading font-semibold text-slate-900">Business</span>, <span className="font-subheading font-semibold text-slate-900">Psychology</span>, <span className="font-subheading font-semibold text-slate-900">Finance</span>, and <span className="font-subheading font-semibold text-slate-900">Entrepreneurship</span>. Instant M-Pesa checkout with immediate PDF download.
             </p>
 
             {/* CTA Buttons -> Inter Medium */}
@@ -65,7 +65,7 @@ export const Hero: React.FC<HeroProps> = ({
                 className="px-6 py-3.5 rounded-xl font-body font-medium text-sm sm:text-base bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 flex items-center gap-2.5 transition-transform active:scale-95 cursor-pointer"
               >
                 <BookOpen className="w-5 h-5 text-white" />
-                <span>Browse Recent Drops & Books</span>
+                <span>Browse Catalog</span>
                 <ArrowRight className="w-5 h-5 text-white" />
               </button>
 
@@ -74,7 +74,7 @@ export const Hero: React.FC<HeroProps> = ({
                 className="px-6 py-3.5 rounded-xl font-body font-medium text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs flex items-center gap-2.5 transition-transform active:scale-95 cursor-pointer"
               >
                 <Smartphone className="w-5 h-5" />
-                <span>Buy Now (100 KES M-Pesa)</span>
+                <span>Buy Now</span>
               </button>
             </div>
 

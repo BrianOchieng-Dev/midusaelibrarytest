@@ -81,6 +81,7 @@ export interface PurchasedBook {
   downloadUrl: string;
   downloadCount: number;
   phoneNumber: string;
+  expiresAt?: number; // Internal 10-minute expiry timestamp
 }
 
 export interface OrderTransaction {

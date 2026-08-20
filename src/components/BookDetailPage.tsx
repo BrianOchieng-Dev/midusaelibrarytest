@@ -142,13 +142,13 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
             {/* Actions Card */}
             <div className="w-full max-w-sm mt-5 p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3.5">
               
-              {/* Primary Buy Now with M-Pesa Button */}
+              {/* Primary Buy Now Button */}
               <button
                 onClick={() => onBuyNow(book)}
                 className="w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 cursor-pointer"
               >
-                <Smartphone className="w-5 h-5" />
-                <span>Buy Now with M-Pesa ({formatPrice(book.priceKES)})</span>
+                <Zap className="w-5 h-5 fill-white text-white" />
+                <span>Buy Now</span>
               </button>
 
               {/* Add to Cart Button */}
@@ -163,7 +163,7 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                 {isAdded ? (
                   <>
                     <Check className="w-4.5 h-4.5 text-emerald-600" />
-                    <span>Added to Cart!</span>
+                    <span>Added to Cart</span>
                   </>
                 ) : (
                   <>

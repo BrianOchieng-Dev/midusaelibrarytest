@@ -73,15 +73,6 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => onScrollToSection('recent-uploads')}
-                  className="hover:text-white text-blue-400 font-subheading font-semibold transition-colors cursor-pointer flex items-center gap-1.5"
-                >
-                  <span>Recent Uploads</span>
-                  <span className="px-1 py-0.2 rounded bg-blue-600 text-[10px] text-white font-mono">NEW</span>
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => onScrollToSection('catalog')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >

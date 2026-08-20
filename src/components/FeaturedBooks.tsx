@@ -2,18 +2,18 @@ import React, { useState, useMemo } from 'react';
 import { Book, BookCategory } from '../types';
 import { CATEGORIES } from '../data/booksData';
 import { BookCover } from './BookCover';
-import { formatPrice, generateWhatsAppUrl } from '../utils/helpers';
+import { formatPrice } from '../utils/helpers';
 import { 
   Search, 
   Star, 
   ShoppingCart, 
   BookOpen, 
   Heart, 
-  MessageSquare, 
   Check, 
   X,
   Sparkles,
-  Smartphone
+  Zap,
+  Eye
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -260,25 +260,17 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
                         </span>
                       </div>
 
-                      {/* Main Buy Now Button with M-Pesa prompt -> Inter Medium */}
+                      {/* Main Buy Now Button -> Inter Medium */}
                       <button
                         onClick={() => onBuyNow(book)}
                         className="w-full py-2.5 px-3 rounded-xl font-body font-medium text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs flex items-center justify-center gap-2 transition-transform active:scale-98 cursor-pointer"
                       >
-                        <Smartphone className="w-4 h-4" />
-                        <span>Buy Now with M-Pesa (KES 100)</span>
+                        <Zap className="w-4 h-4 fill-white text-white" />
+                        <span>Buy Now</span>
                       </button>
 
                       {/* Secondary action buttons -> Inter Medium */}
                       <div className="grid grid-cols-2 gap-2">
-                        <button
-                          onClick={() => onPreviewBook(book)}
-                          className="w-full py-2 px-2.5 rounded-xl font-body font-medium text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                        >
-                          <BookOpen className="w-4 h-4 text-blue-600" />
-                          <span>Overview</span>
-                        </button>
-
                         <button
                           onClick={() => handleAddToCartWithFeedback(book)}
                           className={`w-full py-2 px-2.5 rounded-xl font-body font-medium text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer ${
@@ -295,22 +287,19 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
                           ) : (
                             <>
                               <ShoppingCart className="w-4 h-4 text-slate-500" />
-                              <span>Add Cart</span>
+                              <span>Add to Cart</span>
                             </>
                           )}
                         </button>
-                      </div>
 
-                      {/* WhatsApp Order Button -> Inter Medium */}
-                      <a
-                        href={generateWhatsAppUrl(book.title)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-2 px-2.5 rounded-xl text-xs sm:text-sm font-body font-medium text-emerald-800 hover:text-emerald-900 bg-emerald-50/70 hover:bg-emerald-100/90 border border-emerald-200/70 flex items-center justify-center gap-1.5 transition-colors"
-                      >
-                        <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>Order on WhatsApp</span>
-                      </a>
+                        <button
+                          onClick={() => onPreviewBook(book)}
+                          className="w-full py-2 px-2.5 rounded-xl font-body font-medium text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                        >
+                          <Eye className="w-4 h-4 text-blue-600" />
+                          <span>Preview</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
