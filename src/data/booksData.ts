@@ -388,6 +388,6 @@ export const FAQS = [
   },
   {
     question: 'Do I get lifetime access to my purchases?',
-    answer: 'Yes. Once purchased, your PDF eBooks are yours forever with unlimited downloads and free access to revised editions.',
+    answer: 'Yes. Once purchased, your eBooks are yours forever with unlimited downloads and free access to revised editions.',
   },
 ];

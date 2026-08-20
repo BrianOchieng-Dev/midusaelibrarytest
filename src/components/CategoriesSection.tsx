@@ -84,8 +84,8 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
                       {getCategoryIcon(category.iconName)}
                     </div>
 
-                    <span className="text-xs font-mono font-bold text-blue-600 bg-white px-2 py-0.5 rounded-lg border border-slate-200">
-                      KSh 100
+                    <span className="text-[11px] font-semibold text-slate-500 bg-white px-2 py-0.5 rounded-lg border border-slate-200">
+                      Collection
                     </span>
                   </div>
 

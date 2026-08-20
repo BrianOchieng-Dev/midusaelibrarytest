@@ -10,8 +10,8 @@ export function generateWhatsAppUrl(bookTitle?: string, customText?: string): st
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(customText)}`;
   }
   const text = bookTitle
-    ? `Hello MidusaElibrary, I would like to buy the PDF eBook "${bookTitle}" for KSh 100. Please share payment and download details.`
-    : 'Hello MidusaElibrary, I would like to buy a PDF eBook for KSh 100.';
+    ? `Hello MidusaElibrary, I would like to buy the eBook "${bookTitle}". Please share payment and download details.`
+    : 'Hello MidusaElibrary, I would like to purchase an eBook.';
 
   return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
 }
@@ -28,7 +28,7 @@ export function generateCartWhatsAppUrl(
     )
     .join('\n');
 
-  const message = `Hello MidusaElibrary! 📚\n\nI would like to purchase the following PDF eBooks:\n\n${itemListText}\n\n*Total Amount:* KSh ${totalKES.toLocaleString()}\n\nPlease send M-Pesa / Card payment instructions and the instant PDF download links!`;
+  const message = `Hello MidusaElibrary! 📚\n\nI would like to purchase the following books:\n\n${itemListText}\n\n*Total Amount:* KSh ${totalKES.toLocaleString()}\n\nPlease send M-Pesa / Card payment instructions and the instant download links!`;
 
   return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 }

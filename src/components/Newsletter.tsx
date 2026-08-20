@@ -40,7 +40,7 @@ export const Newsletter: React.FC = () => {
                 <span>Subscribed Successfully</span>
               </div>
               <p className="text-[11px] text-blue-100">
-                You will receive alerts for new 100 KES PDF releases.
+                You will receive alerts when new bestsellers are added to the library.
               </p>
             </div>
           ) : (

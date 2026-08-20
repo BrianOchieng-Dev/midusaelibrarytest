@@ -4,7 +4,7 @@ import { BookOpen, Sparkles, Star, Cpu, Code2, Brain, TrendingUp, Briefcase, Roc
 
 interface BookCoverProps {
   book: Book;
-  size?: 'sm' | 'md' | 'lg' | 'hero';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'hero';
   showBadge?: boolean;
   className?: string;
 }
@@ -18,21 +18,22 @@ export const BookCover: React.FC<BookCoverProps> = ({
   const getCategoryIcon = () => {
     switch (book.category) {
       case 'Self Development':
-        return <Sparkles className="w-4 h-4 text-purple-300" />;
+        return <Sparkles className={`${size === 'xs' ? 'w-3 h-3' : 'w-4 h-4'} text-purple-300`} />;
       case 'Business':
-        return <Briefcase className="w-4 h-4 text-sky-300" />;
+        return <Briefcase className={`${size === 'xs' ? 'w-3 h-3' : 'w-4 h-4'} text-sky-300`} />;
       case 'Psychology':
-        return <Brain className="w-4 h-4 text-pink-300" />;
+        return <Brain className={`${size === 'xs' ? 'w-3 h-3' : 'w-4 h-4'} text-pink-300`} />;
       case 'Finance':
-        return <TrendingUp className="w-4 h-4 text-emerald-300" />;
+        return <TrendingUp className={`${size === 'xs' ? 'w-3 h-3' : 'w-4 h-4'} text-emerald-300`} />;
       case 'Entrepreneurship':
-        return <Rocket className="w-4 h-4 text-amber-300" />;
+        return <Rocket className={`${size === 'xs' ? 'w-3 h-3' : 'w-4 h-4'} text-amber-300`} />;
       default:
-        return <BookOpen className="w-4 h-4 text-blue-300" />;
+        return <BookOpen className={`${size === 'xs' ? 'w-3 h-3' : 'w-4 h-4'} text-blue-300`} />;
     }
   };
 
   const dimensions = {
+    xs: 'w-[75px] h-[110px]',
     sm: 'w-[140px] h-[200px]',
     md: 'w-[200px] h-[290px]',
     lg: 'w-[240px] h-[340px]',
@@ -87,32 +88,45 @@ export const BookCover: React.FC<BookCoverProps> = ({
       )}
 
       {/* Main Cover Content */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-4 sm:p-5 pl-6 sm:pl-7 text-left">
+      <div className={`relative z-10 flex flex-col justify-between h-full text-left ${
+        size === 'xs' ? 'p-2 pl-2.5' : 'p-4 sm:p-5 pl-6 sm:pl-7'
+      }`}>
         {/* Header: Midusa Logo / Category Pill */}
         <div>
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <div className="flex items-center gap-1.5 opacity-90">
-              <div className="p-1 rounded-md bg-white/10 backdrop-blur-sm">
+          <div className={`flex items-center justify-between gap-1 ${size === 'xs' ? 'mb-1' : 'mb-2'}`}>
+            <div className="flex items-center gap-1 opacity-90">
+              <div className={`rounded-md bg-white/10 backdrop-blur-sm ${size === 'xs' ? 'p-0.5' : 'p-1'}`}>
                 {getCategoryIcon()}
               </div>
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-300">
+              <span className={`font-semibold uppercase tracking-wider text-slate-300 ${
+                size === 'xs' ? 'text-[8px]' : 'text-[11px]'
+              }`}>
                 {book.category}
               </span>
             </div>
           </div>
 
-          <div className="w-8 h-1 rounded-full mb-3" style={{ backgroundColor: book.coverGradient.accent }} />
+          <div 
+            className={`rounded-full ${size === 'xs' ? 'w-4 h-0.5 mb-1.5' : 'w-8 h-1 mb-3'}`} 
+            style={{ backgroundColor: book.coverGradient.accent }} 
+          />
 
           {/* Book Title */}
           <h4 
-            className={`font-bold tracking-tight text-white line-clamp-3 leading-snug drop-shadow-md ${
-              size === 'sm' ? 'text-sm' : size === 'hero' ? 'text-xl sm:text-2xl' : 'text-base sm:text-lg'
+            className={`font-bold tracking-tight text-white leading-snug drop-shadow-md ${
+              size === 'xs' 
+                ? 'text-[10px] line-clamp-2 leading-tight' 
+                : size === 'sm' 
+                ? 'text-sm line-clamp-3' 
+                : size === 'hero' 
+                ? 'text-xl sm:text-2xl line-clamp-3' 
+                : 'text-base sm:text-lg line-clamp-3'
             }`}
           >
             {book.title}
           </h4>
 
-          {size !== 'sm' && (
+          {size !== 'sm' && size !== 'xs' && (
             <p className="text-[11px] text-slate-300/90 mt-1 line-clamp-2 leading-relaxed">
               {book.subtitle}
             </p>
@@ -120,26 +134,34 @@ export const BookCover: React.FC<BookCoverProps> = ({
         </div>
 
         {/* Footer: Author & Formats */}
-        <div className="pt-2 border-t border-white/10 mt-auto">
+        <div className={`border-t border-white/10 mt-auto ${size === 'xs' ? 'pt-1' : 'pt-2'}`}>
           <div className="flex items-center justify-between text-xs text-slate-200">
             <div>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-mono">Author</p>
-              <p className="font-semibold text-xs text-white truncate max-w-[120px] sm:max-w-[150px]">
+              {size !== 'xs' && (
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest font-mono">Author</p>
+              )}
+              <p className={`font-semibold text-white truncate ${
+                size === 'xs' ? 'text-[9px] max-w-[50px]' : 'text-xs max-w-[120px] sm:max-w-[150px]'
+              }`}>
                 {book.author}
               </p>
             </div>
             
-            <div className="flex items-center gap-1 text-amber-300 text-xs font-semibold bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-sm">
-              <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+            <div className={`flex items-center gap-1 text-amber-300 font-semibold bg-black/40 rounded backdrop-blur-sm ${
+              size === 'xs' ? 'text-[9px] px-1 py-0.2' : 'text-xs px-1.5 py-0.5'
+            }`}>
+              <Star className={`${size === 'xs' ? 'w-2 h-2' : 'w-3 h-3'} fill-amber-400 text-amber-400`} />
               <span>{book.rating}</span>
             </div>
           </div>
 
           {/* Midusa Edition Watermark */}
-          <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/5 text-[9px] text-slate-400 tracking-wider font-mono">
-            <span>MIDUSA DIGITAL</span>
-            <span>{book.publicationYear} ED.</span>
-          </div>
+          {size !== 'xs' && (
+            <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/5 text-[9px] text-slate-400 tracking-wider font-mono">
+              <span>MIDUSA DIGITAL</span>
+              <span>{book.publicationYear} ED.</span>
+            </div>
+          )}
         </div>
       </div>
 

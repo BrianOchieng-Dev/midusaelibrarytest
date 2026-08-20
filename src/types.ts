@@ -1,3 +1,5 @@
+export type AppView = 'home' | 'book-detail' | 'profile';
+
 export type BookCategory = 
   | 'Self Development'
   | 'Business'
@@ -10,13 +12,14 @@ export interface Book {
   title: string;
   subtitle: string;
   author: string;
-  priceKES: number; // Flat 100 KSh
+  priceKES: number; // 100 KSh
   originalPriceKES: number;
   rating: number;
   reviewsCount: number;
   category: BookCategory;
   pages: number;
   fileSize: string;
+  publicationYear?: number;
   coverGradient: {
     from: string;
     via?: string;
@@ -60,6 +63,33 @@ export interface UserProfile {
   id: string;
   name: string;
   email: string;
+  phone?: string;
   avatar: string;
-  provider: 'google' | 'facebook' | 'email';
+  provider: 'google' | 'facebook' | 'mpesa' | 'email';
+}
+
+export interface PurchasedBook {
+  id: string;
+  book: Book;
+  purchaseDate: string;
+  mpesaReceiptNumber: string;
+  uniqueDownloadToken: string;
+  downloadUrl: string;
+  downloadCount: number;
+  phoneNumber: string;
+}
+
+export interface OrderTransaction {
+  orderId: string;
+  mpesaReceiptNumber: string;
+  phoneNumber: string;
+  date: string;
+  amountKES: number;
+  items: {
+    bookId: string;
+    bookTitle: string;
+    priceKES: number;
+    uniqueDownloadToken: string;
+  }[];
+  status: 'completed' | 'processing' | 'failed';
 }

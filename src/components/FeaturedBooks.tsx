@@ -12,7 +12,8 @@ import {
   MessageSquare, 
   Check, 
   X,
-  Sparkles
+  Sparkles,
+  Smartphone
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -23,6 +24,7 @@ interface FeaturedBooksProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onPreviewBook: (book: Book) => void;
+  onBuyNow: (book: Book) => void;
   onAddToCart: (book: Book) => void;
   onToggleWishlist: (book: Book) => void;
   wishlistIds: string[];
@@ -35,6 +37,7 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
   searchQuery,
   onSearchChange,
   onPreviewBook,
+  onBuyNow,
   onAddToCart,
   onToggleWishlist,
   wishlistIds,
@@ -66,12 +69,12 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
     onAddToCart(book);
     setAddedBookId(book.id);
     confetti({
-      particleCount: 25,
-      spread: 40,
+      particleCount: 20,
+      spread: 35,
       origin: { y: 0.8 },
       colors: ['#00F2FE', '#1E90FF'],
     });
-    setTimeout(() => setAddedBookId(null), 1600);
+    setTimeout(() => setAddedBookId(null), 1400);
   };
 
   return (
@@ -83,7 +86,7 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-xs font-semibold text-blue-700 mb-2">
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              <span>Complete PDF Books</span>
+              <span>Explore Library</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               Featured eBook Library
@@ -91,7 +94,7 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
           </div>
 
           <span className="text-xs font-mono text-slate-500">
-            Showing <span className="text-blue-600 font-bold">{filteredBooks.length}</span> titles • <span className="text-emerald-600 font-bold">KSh 100 Each</span>
+            Showing <span className="text-blue-600 font-bold">{filteredBooks.length}</span> titles
           </span>
         </div>
 
@@ -254,32 +257,41 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
                         </span>
                       </div>
 
-                      {/* Action buttons */}
+                      {/* Main Buy Now Button with M-Pesa prompt */}
+                      <button
+                        onClick={() => onBuyNow(book)}
+                        className="w-full py-2.5 px-3 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs flex items-center justify-center gap-1.5 transition-transform active:scale-98 cursor-pointer"
+                      >
+                        <Smartphone className="w-3.5 h-3.5" />
+                        <span>Buy Now with M-Pesa</span>
+                      </button>
+
+                      {/* Secondary action buttons */}
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           onClick={() => onPreviewBook(book)}
-                          className="w-full py-2 px-2 rounded-xl font-semibold text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 flex items-center justify-center gap-1 transition-colors"
+                          className="w-full py-2 px-2 rounded-xl font-semibold text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 flex items-center justify-center gap-1 transition-colors cursor-pointer"
                         >
                           <BookOpen className="w-3.5 h-3.5 text-blue-600" />
-                          <span>Details</span>
+                          <span>Overview</span>
                         </button>
 
                         <button
                           onClick={() => handleAddToCartWithFeedback(book)}
-                          className={`w-full py-2 px-2 rounded-xl font-bold text-xs flex items-center justify-center gap-1 transition-all active:scale-95 ${
+                          className={`w-full py-2 px-2 rounded-xl font-bold text-xs flex items-center justify-center gap-1 transition-all active:scale-95 cursor-pointer ${
                             isJustAdded
-                              ? 'bg-emerald-600 text-white'
-                              : 'bg-blue-600 hover:bg-blue-700 text-white'
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                              : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200'
                           }`}
                         >
                           {isJustAdded ? (
                             <>
-                              <Check className="w-3.5 h-3.5" />
-                              <span>Added!</span>
+                              <Check className="w-3.5 h-3.5 text-emerald-600" />
+                              <span>Added</span>
                             </>
                           ) : (
                             <>
-                              <ShoppingCart className="w-3.5 h-3.5" />
+                              <ShoppingCart className="w-3.5 h-3.5 text-slate-500" />
                               <span>Add Cart</span>
                             </>
                           )}
@@ -291,7 +303,7 @@ export const FeaturedBooks: React.FC<FeaturedBooksProps> = ({
                         href={generateWhatsAppUrl(book.title)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-1.5 px-2 rounded-lg text-xs font-semibold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 flex items-center justify-center gap-1.5 transition-colors"
+                        className="w-full py-1.5 px-2 rounded-lg text-[11px] font-semibold text-emerald-700 hover:text-emerald-800 bg-emerald-50/60 hover:bg-emerald-100/80 border border-emerald-200/60 flex items-center justify-center gap-1.5 transition-colors"
                       >
                         <MessageSquare className="w-3 h-3 text-emerald-600" />
                         <span>Order on WhatsApp</span>

@@ -7,22 +7,23 @@ import {
   ArrowRight, 
   ShieldCheck, 
   Zap, 
-  Flame,
-  CheckCircle2,
-  Info
+  CheckCircle2, 
+  Sparkles,
+  Smartphone
 } from 'lucide-react';
 
 interface HeroProps {
   featuredBooks: Book[];
   onBrowseBooks: () => void;
   onPreviewBook: (book: Book) => void;
-  onAddToCart: (book: Book) => void;
+  onBuyNow: (book: Book) => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   featuredBooks,
   onBrowseBooks,
   onPreviewBook,
+  onBuyNow,
 }) => {
   const [activeHeroIdx, setActiveHeroIdx] = useState(0);
   const activeBook = featuredBooks[activeHeroIdx] || featuredBooks[0];
@@ -38,12 +39,10 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Left Column: Copywriting & CTAs */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-4 sm:space-y-5">
             
-            {/* Price Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-xs text-blue-700 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="font-semibold">Digital PDF eBooks</span>
-              <span className="text-slate-300">•</span>
-              <span className="font-bold text-blue-800">KSh 100 Each</span>
+            {/* Slogan Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-xs shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span className="font-semibold">Knowledge should not be that expensive</span>
             </div>
 
             {/* Main Headline */}
@@ -56,26 +55,26 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Concise Subheadline */}
             <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Explore bestsellers across <span className="font-semibold text-slate-800">Self Development</span>, <span className="font-semibold text-slate-800">Business</span>, <span className="font-semibold text-slate-800">Psychology</span>, <span className="font-semibold text-slate-800">Finance</span>, and <span className="font-semibold text-slate-800">Entrepreneurship</span>. Delivered instantly in PDF format for just KSh 100.
+              Explore handpicked titles across <span className="font-semibold text-slate-800">Self Development</span>, <span className="font-semibold text-slate-800">Business</span>, <span className="font-semibold text-slate-800">Psychology</span>, <span className="font-semibold text-slate-800">Finance</span>, and <span className="font-semibold text-slate-800">Entrepreneurship</span>. Instant M-Pesa prompt and unique download links sent directly to your account.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1">
               <button
                 onClick={onBrowseBooks}
-                className="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 flex items-center gap-2 transition-transform active:scale-95"
+                className="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 flex items-center gap-2 transition-transform active:scale-95 cursor-pointer"
               >
                 <BookOpen className="w-4 h-4 text-white" />
-                <span>Browse All Books (KSh 100)</span>
+                <span>Browse All Books</span>
                 <ArrowRight className="w-4 h-4 text-white" />
               </button>
 
               <button
-                onClick={() => onPreviewBook(activeBook)}
-                className="px-5 py-3 rounded-xl font-semibold text-xs sm:text-sm bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 shadow-xs flex items-center gap-2 transition-transform active:scale-95"
+                onClick={() => onBuyNow(activeBook)}
+                className="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs flex items-center gap-2 transition-transform active:scale-95 cursor-pointer"
               >
-                <Info className="w-4 h-4 text-blue-600" />
-                <span>Book Overview</span>
+                <Smartphone className="w-4 h-4" />
+                <span>Buy Now (M-Pesa)</span>
               </button>
             </div>
 
@@ -83,15 +82,15 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-1 text-xs text-slate-500">
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Instant PDF Download</span>
+                <span>Instant M-Pesa Prompt</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-                <span>Universal Device Support</span>
+                <span>Unique Account Download Link</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Zap className="w-3.5 h-3.5 text-amber-500" />
-                <span>WhatsApp Instant Order</span>
+                <span>Lifetime Access</span>
               </div>
             </div>
 
@@ -122,8 +121,7 @@ export const Hero: React.FC<HeroProps> = ({
                 {/* Floating Badge Over Book */}
                 <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-11/12 p-2.5 rounded-xl bg-white/95 border border-slate-200 shadow-lg backdrop-blur-md flex items-center justify-between z-20">
                   <div>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-blue-600 font-mono flex items-center gap-1">
-                      <Flame className="w-3 h-3 text-amber-500 fill-amber-500" />
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-blue-600 font-mono">
                       Featured Title
                     </span>
                     <p className="text-xs font-bold text-slate-900 truncate max-w-[140px] sm:max-w-[170px]">
@@ -134,9 +132,6 @@ export const Hero: React.FC<HeroProps> = ({
                   <div className="text-right">
                     <span className="text-xs font-bold text-blue-600">
                       {formatPrice(activeBook.priceKES)}
-                    </span>
-                    <span className="block text-[9px] text-slate-400 font-mono">
-                      PDF Format
                     </span>
                   </div>
                 </div>

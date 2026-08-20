@@ -11,9 +11,8 @@ import {
   X, 
   ChevronDown, 
   Sparkles,
-  Layers,
-  HelpCircle,
-  Award
+  Award,
+  HelpCircle
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -21,7 +20,8 @@ interface NavbarProps {
   wishlistCount: number;
   onOpenCart: () => void;
   onOpenWishlist: () => void;
-  onOpenAuth: () => void;
+  onOpenProfile: () => void;
+  onNavigateHome: () => void;
   onSelectCategory: (category: BookCategory | 'All') => void;
   selectedCategory: BookCategory | 'All';
   currentUser: UserProfile | null;
@@ -35,7 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   wishlistCount,
   onOpenCart,
   onOpenWishlist,
-  onOpenAuth,
+  onOpenProfile,
+  onNavigateHome,
   onSelectCategory,
   selectedCategory,
   currentUser,
@@ -68,6 +69,19 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const handleHomeClick = () => {
+    onNavigateHome();
+    onScrollToSection('hero');
+  };
+
+  const handleCatalogClick = (category: BookCategory | 'All' = 'All') => {
+    onSelectCategory(category);
+    onNavigateHome();
+    setTimeout(() => {
+      onScrollToSection('catalog');
+    }, 50);
+  };
+
   return (
     <>
       {/* Sticky Top Header */}
@@ -83,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             
             {/* Logo */}
             <div 
-              onClick={() => onScrollToSection('hero')}
+              onClick={handleHomeClick}
               className="flex items-center gap-2 cursor-pointer select-none shrink-0"
             >
               <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-blue-600 text-white shadow-xs">
@@ -94,7 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   Midusa<span className="text-blue-600">Elibrary</span>
                 </span>
                 <span className="text-[10px] text-slate-500 font-medium hidden sm:block">
-                  PDF Bookstore • KSh 100
+                  Digital Bookstore
                 </span>
               </div>
             </div>
@@ -102,10 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Desktop Navigation Links */}
             <nav className="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600">
               <button
-                onClick={() => {
-                  onSelectCategory('All');
-                  onScrollToSection('catalog');
-                }}
+                onClick={() => handleCatalogClick('All')}
                 className="px-3 py-1.5 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors"
               >
                 All Books
@@ -133,9 +144,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   >
                     <button
                       onClick={() => {
-                        onSelectCategory('All');
+                        handleCatalogClick('All');
                         setIsCategoryDropdownOpen(false);
-                        onScrollToSection('catalog');
                       }}
                       className={`w-full text-left px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between transition-colors ${
                         selectedCategory === 'All'
@@ -151,9 +161,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <button
                         key={cat.id}
                         onClick={() => {
-                          onSelectCategory(cat.name);
+                          handleCatalogClick(cat.name);
                           setIsCategoryDropdownOpen(false);
-                          onScrollToSection('catalog');
                         }}
                         className={`w-full text-left px-3 py-1.5 rounded-xl text-xs flex items-center justify-between transition-colors ${
                           selectedCategory === cat.name
@@ -169,21 +178,30 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
 
               <button
-                onClick={() => onScrollToSection('why-choose-us')}
+                onClick={() => {
+                  onNavigateHome();
+                  setTimeout(() => onScrollToSection('why-choose-us'), 50);
+                }}
                 className="px-3 py-1.5 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors"
               >
                 Why Us
               </button>
               
               <button
-                onClick={() => onScrollToSection('testimonials')}
+                onClick={() => {
+                  onNavigateHome();
+                  setTimeout(() => onScrollToSection('testimonials'), 50);
+                }}
                 className="px-3 py-1.5 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors"
               >
                 Reviews
               </button>
               
               <button
-                onClick={() => onScrollToSection('faq')}
+                onClick={() => {
+                  onNavigateHome();
+                  setTimeout(() => onScrollToSection('faq'), 50);
+                }}
                 className="px-3 py-1.5 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors"
               >
                 FAQ
@@ -200,7 +218,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="text"
                   placeholder="Search books..."
                   value={searchQuery}
-                  onChange={(e) => onSearchChange(e.target.value)}
+                  onChange={(e) => {
+                    onSearchChange(e.target.value);
+                    onNavigateHome();
+                  }}
                   className="w-full pl-8 pr-7 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
                 {searchQuery && (
@@ -253,10 +274,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </button>
 
-              {/* User Sign In (Desktop) */}
+              {/* User Profile / Account Button (Desktop) */}
               <button
-                onClick={onOpenAuth}
+                onClick={onOpenProfile}
                 className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-xs font-semibold text-slate-800 transition-colors"
+                title="User Profile & Library"
               >
                 {currentUser ? (
                   <>
@@ -265,14 +287,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                       alt={currentUser.name}
                       className="w-4 h-4 rounded-full object-cover border border-blue-500"
                     />
-                    <span className="max-w-[70px] truncate">
+                    <span className="max-w-[75px] truncate">
                       {currentUser.name.split(' ')[0]}
                     </span>
                   </>
                 ) : (
                   <>
                     <User className="w-3.5 h-3.5 text-blue-600" />
-                    <span>Sign In</span>
+                    <span>Account</span>
                   </>
                 )}
               </button>
@@ -299,7 +321,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="text"
                   placeholder="Search by title, author, or topic..."
                   value={searchQuery}
-                  onChange={(e) => onSearchChange(e.target.value)}
+                  onChange={(e) => {
+                    onSearchChange(e.target.value);
+                    onNavigateHome();
+                  }}
                   className="w-full pl-9 pr-8 py-2 bg-slate-100 border border-blue-500 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white"
                   autoFocus
                 />
@@ -330,7 +355,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="space-y-5">
               {/* Drawer Header */}
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                <div className="flex items-center gap-2">
+                <div 
+                  onClick={() => {
+                    handleHomeClick();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
                   <div className="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center">
                     <BookOpen className="w-4 h-4" />
                   </div>
@@ -346,12 +377,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
               </div>
 
-              {/* User Profile / Sign In Button */}
+              {/* User Profile Page Button */}
               <div>
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);
-                    onOpenAuth();
+                    onOpenProfile();
                   }}
                   className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-left flex items-center gap-3 hover:bg-slate-100 transition-colors"
                 >
@@ -364,7 +395,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       />
                       <div className="overflow-hidden">
                         <p className="font-bold text-xs text-slate-900 truncate">{currentUser.name}</p>
-                        <p className="text-[10px] text-slate-500 truncate">{currentUser.email}</p>
+                        <p className="text-[10px] text-slate-500 truncate">View Profile & Library</p>
                       </div>
                     </>
                   ) : (
@@ -373,8 +404,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                         <User className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="font-bold text-xs text-slate-900">Sign In</p>
-                        <p className="text-[10px] text-slate-500">Google or Facebook</p>
+                        <p className="font-bold text-xs text-slate-900">My Account</p>
+                        <p className="text-[10px] text-slate-500">Sign in with Google / Facebook</p>
                       </div>
                     </>
                   )}
@@ -386,19 +417,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider px-2">Navigation</p>
                 <button
                   onClick={() => {
-                    onSelectCategory('All');
-                    onScrollToSection('catalog');
+                    handleCatalogClick('All');
                     setIsMobileMenuOpen(false);
                   }}
                   className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center justify-between"
                 >
-                  <span>All Books (KSh 100)</span>
+                  <span>All Books</span>
                   <BookOpen className="w-4 h-4 text-slate-400" />
                 </button>
 
                 <button
                   onClick={() => {
-                    onScrollToSection('why-choose-us');
+                    onNavigateHome();
+                    setTimeout(() => onScrollToSection('why-choose-us'), 50);
                     setIsMobileMenuOpen(false);
                   }}
                   className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center justify-between"
@@ -409,7 +440,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 <button
                   onClick={() => {
-                    onScrollToSection('testimonials');
+                    onNavigateHome();
+                    setTimeout(() => onScrollToSection('testimonials'), 50);
                     setIsMobileMenuOpen(false);
                   }}
                   className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center justify-between"
@@ -420,7 +452,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 <button
                   onClick={() => {
-                    onScrollToSection('faq');
+                    onNavigateHome();
+                    setTimeout(() => onScrollToSection('faq'), 50);
                     setIsMobileMenuOpen(false);
                   }}
                   className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center justify-between"
@@ -437,8 +470,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <button
                     key={cat.id}
                     onClick={() => {
-                      onSelectCategory(cat.name);
-                      onScrollToSection('catalog');
+                      handleCatalogClick(cat.name);
                       setIsMobileMenuOpen(false);
                     }}
                     className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between ${
@@ -456,7 +488,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Bottom Note */}
             <div className="pt-4 border-t border-slate-100 text-center">
               <p className="text-[11px] text-slate-400">
-                All eBooks are delivered in PDF format for KSh 100.
+                Knowledge should not be that expensive.
               </p>
             </div>
           </div>

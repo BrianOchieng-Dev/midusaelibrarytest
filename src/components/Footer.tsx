@@ -40,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Digital bookstore providing top bestsellers across Self Development, Business, Psychology, Finance, and Entrepreneurship in high-resolution PDF format for KSh 100 each.
+              Digital bookstore providing top bestsellers across Self Development, Business, Psychology, Finance, and Entrepreneurship in high-resolution PDF format with instant access.
             </p>
 
             {/* Direct WhatsApp Concierge Button */}
@@ -136,7 +136,7 @@ export const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-2">
               <li className="flex items-center gap-2 text-slate-300">
                 <Zap className="w-3.5 h-3.5 text-blue-400" />
-                <span>Instant PDF Download</span>
+                <span>Instant Digital Download</span>
               </li>
               <li className="flex items-center gap-2 text-slate-300">
                 <Lock className="w-3.5 h-3.5 text-emerald-400" />
@@ -144,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li className="flex items-center gap-2 text-slate-300">
                 <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
-                <span>KSh 100 Fixed Price</span>
+                <span>Lifetime Access</span>
               </li>
               <li className="flex items-center gap-2 text-slate-300">
                 <Smartphone className="w-3.5 h-3.5 text-indigo-400" />

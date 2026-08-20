@@ -13,8 +13,8 @@ export const WhyChooseUs: React.FC = () => {
   const features = [
     {
       id: 1,
-      title: 'Instant PDF Delivery',
-      description: 'Get immediate download access to crisp PDF files seconds after checkout.',
+      title: 'Instant Digital Delivery',
+      description: 'Get immediate download access to crisp eBook files seconds after checkout.',
       icon: Zap,
       accent: '#0284C7',
     },
@@ -27,8 +27,8 @@ export const WhyChooseUs: React.FC = () => {
     },
     {
       id: 3,
-      title: 'Flat KSh 100 Price',
-      description: 'Every single high-impact eBook in our catalog is priced at just KSh 100.',
+      title: 'Affordable Access',
+      description: 'High-impact bestsellers curated to be universally accessible for every reader.',
       icon: Coins,
       accent: '#059669',
     },
