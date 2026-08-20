@@ -8,164 +8,203 @@ import {
   ShieldCheck, 
   Zap, 
   Lock, 
-  Smartphone
+  Smartphone,
+  CheckCircle2,
+  Heart
 } from 'lucide-react';
 
 interface FooterProps {
   onSelectCategory: (category: BookCategory) => void;
-  onScrollToSection: (sectionId: string) => void;
+  onNavigateHome: () => void;
+  onNavigateBestSellers: () => void;
+  onNavigateNewArrivals: () => void;
+  onNavigateAbout: () => void;
+  onNavigateContact: () => void;
+  onOpenPolicy: (type: 'refund' | 'privacy' | 'terms') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onSelectCategory,
-  onScrollToSection,
+  onNavigateHome,
+  onNavigateBestSellers,
+  onNavigateNewArrivals,
+  onNavigateAbout,
+  onNavigateContact,
+  onOpenPolicy,
 }) => {
   return (
-    <footer className="relative bg-slate-900 border-t border-slate-800 pt-14 pb-10 text-slate-400 text-sm">
+    <footer className="relative bg-[#080C14] border-t border-slate-800/90 pt-16 pb-12 text-slate-400 text-sm font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-slate-800">
+        
+        {/* Main Footer Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
           
-          {/* Col 1: Brand */}
-          <div className="lg:col-span-2 space-y-3.5">
-            <div 
-              onClick={() => onScrollToSection('hero')}
-              className="flex items-center gap-2.5 cursor-pointer inline-flex"
+          {/* Col 1 & 2: Brand Story & Mission */}
+          <div className="lg:col-span-2 space-y-4">
+            <button 
+              onClick={onNavigateHome}
+              className="flex items-center gap-2.5 cursor-pointer text-left group"
             >
-              <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-blue-600 text-white shadow-xs">
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-600 text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
                 <BookOpen className="w-5 h-5" />
               </div>
-              <span className="text-lg sm:text-xl font-bold tracking-tight text-white">
-                Midusa<span className="text-blue-400">Elibrary</span>
-              </span>
-            </div>
+              <div>
+                <span className="text-xl font-heading font-extrabold tracking-tight text-white">
+                  Midusa<span className="text-blue-500">Elibrary</span>
+                </span>
+                <span className="text-[10px] font-mono text-slate-400 block">
+                  Kenya's Digital Knowledge Hub
+                </span>
+              </div>
+            </button>
 
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              Digital bookstore providing top bestsellers across Self Development, Business, Psychology, Finance, and Entrepreneurship in high-resolution PDF format with instant access.
+            <p className="text-sm text-slate-400 leading-relaxed max-w-sm font-body">
+              Democratizing high-yield business, psychology, and self-mastery books across Kenya. Every title is standardized in high-res PDF format for an effortless flat KES 100 via Safaricom M-Pesa.
             </p>
 
             {/* Direct WhatsApp Concierge Button */}
             <div className="pt-2">
               <a
-                href={generateWhatsAppUrl()}
+                href={generateWhatsAppUrl(undefined, 'Hello Midusa Support, I need help with an eBook.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 transition-colors"
               >
-                <MessageSquare className="w-4.5 h-4.5 text-emerald-400" />
-                <span>WhatsApp Orders & Inquiries</span>
+                <MessageSquare className="w-4 h-4 text-emerald-400" />
+                <span>24/7 WhatsApp Support Desk</span>
               </a>
             </div>
           </div>
 
-          {/* Col 2: Quick Links */}
-          <div className="space-y-3">
-            <h4 className="font-bold text-xs sm:text-sm uppercase tracking-wider text-slate-200">
+          {/* Col 3: Navigation Standards */}
+          <div className="space-y-3.5">
+            <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">
               Navigation
             </h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
                 <button
-                  onClick={() => onScrollToSection('hero')}
+                  onClick={onNavigateHome}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Home
+                  Home Store
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onScrollToSection('catalog')}
+                  onClick={onNavigateBestSellers}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Featured Books
+                  Best Sellers
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onScrollToSection('why-choose-us')}
+                  onClick={onNavigateNewArrivals}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Why Choose Us
+                  New Arrivals (2026)
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onScrollToSection('testimonials')}
+                  onClick={onNavigateAbout}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Reader Reviews
+                  About MidusaElibrary
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onScrollToSection('faq')}
+                  onClick={onNavigateContact}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  FAQ
+                  Contact & Help Desk
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Categories */}
-          <div className="space-y-3">
-            <h4 className="font-bold text-xs sm:text-sm uppercase tracking-wider text-slate-200">
-              Domains
+          {/* Col 4: Book Categories */}
+          <div className="space-y-3.5">
+            <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">
+              Genres & Collections
             </h4>
-            <ul className="space-y-2 text-sm">
-              {CATEGORIES.slice(0, 5).map((c) => (
-                <li key={c.id}>
+            <ul className="space-y-2.5 text-xs sm:text-sm">
+              {CATEGORIES.map((cat) => (
+                <li key={cat.id}>
                   <button
-                    onClick={() => {
-                      onSelectCategory(c.name);
-                      onScrollToSection('catalog');
-                    }}
-                    className="hover:text-white transition-colors flex items-center justify-between w-full text-left cursor-pointer"
+                    onClick={() => onSelectCategory(cat.name)}
+                    className="hover:text-white transition-colors cursor-pointer"
                   >
-                    <span>{c.name}</span>
+                    {cat.name}
                   </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Col 4: Trust & Specs */}
-          <div className="space-y-3">
-            <h4 className="font-bold text-xs sm:text-sm uppercase tracking-wider text-slate-200">
-              Delivery & Formats
+          {/* Col 5: Trust Standards & Legal */}
+          <div className="space-y-3.5">
+            <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">
+              Trust & Policies
             </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li className="flex items-center gap-2 text-slate-300">
-                <Zap className="w-4 h-4 text-blue-400" />
-                <span>Instant Digital Download</span>
+            <ul className="space-y-2.5 text-xs sm:text-sm">
+              <li>
+                <button
+                  onClick={() => onOpenPolicy('refund')}
+                  className="hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 text-emerald-400"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>100% Refund Policy</span>
+                </button>
               </li>
-              <li className="flex items-center gap-2 text-slate-300">
-                <Lock className="w-4 h-4 text-emerald-400" />
-                <span>Encrypted Payments</span>
+              <li>
+                <button
+                  onClick={() => onOpenPolicy('privacy')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Privacy & Data Security
+                </button>
               </li>
-              <li className="flex items-center gap-2 text-slate-300">
-                <ShieldCheck className="w-4 h-4 text-blue-400" />
-                <span>Lifetime Access</span>
+              <li>
+                <button
+                  onClick={() => onOpenPolicy('terms')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Terms of Digital Service
+                </button>
               </li>
-              <li className="flex items-center gap-2 text-slate-300">
-                <Smartphone className="w-4 h-4 text-indigo-400" />
-                <span>Mobile, Tablet & PC Sync</span>
+              <li>
+                <div className="pt-2 text-[11px] text-slate-500 space-y-1">
+                  <div>Nairobi, Kenya</div>
+                  <div>Mon - Sun: 7am - 11pm EAT</div>
+                </div>
               </li>
             </ul>
           </div>
 
         </div>
 
-        {/* Bottom copyright */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-xs sm:text-sm">
-          <p>
-            © {new Date().getFullYear()} MidusaElibrary. All rights reserved.
-          </p>
-
-          <div className="flex items-center gap-5">
-            <span className="hover:text-slate-300 cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-slate-300 cursor-pointer">Terms of Service</span>
-            <span className="hover:text-slate-300 cursor-pointer">Refund Policy</span>
+        {/* Bottom Bar: Trust Badges & Copyright */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span>© {new Date().getFullYear()} MidusaElibrary. All rights reserved.</span>
           </div>
+
+          {/* Payment Badges */}
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] text-slate-400">Accepted Payments:</span>
+            <div className="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold font-mono text-[10px]">
+              M-PESA
+            </div>
+            <div className="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold font-mono text-[10px]">
+              VISA / MASTERCARD
+            </div>
+          </div>
+
         </div>
 
       </div>

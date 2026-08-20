@@ -1,4 +1,15 @@
-export type AppView = 'home' | 'book-detail' | 'profile';
+export type AppView = 
+  | 'home' 
+  | 'book-detail' 
+  | 'profile' 
+  | 'about' 
+  | 'contact' 
+  | 'terms' 
+  | 'privacy' 
+  | 'refund' 
+  | 'reader' 
+  | 'bestsellers' 
+  | 'newarrivals';
 
 export type BookCategory = 
   | 'Self Development'
@@ -7,11 +18,53 @@ export type BookCategory =
   | 'Finance'
   | 'Entrepreneurship';
 
+export interface TableOfContentItem {
+  id: string;
+  chapterNumber: number;
+  title: string;
+  pages: string;
+  previewAvailable: boolean;
+  content: string;
+}
+
+export interface BookReview {
+  id: string;
+  bookId: string;
+  userName: string;
+  userAvatar?: string;
+  rating: number;
+  date: string;
+  title: string;
+  comment: string;
+  verifiedPurchase: boolean;
+}
+
+export interface ReaderBookmark {
+  id: string;
+  bookId: string;
+  chapterId: string;
+  pageNumber: number;
+  title: string;
+  timestamp: string;
+}
+
+export interface ReaderNote {
+  id: string;
+  bookId: string;
+  chapterId: string;
+  selectedText: string;
+  note: string;
+  timestamp: string;
+  color?: string;
+}
+
 export interface Book {
   id: string;
+  slug?: string;
   title: string;
   subtitle: string;
   author: string;
+  authorBio?: string;
   priceKES: number; // 100 KSh
   originalPriceKES: number;
   rating: number;
@@ -22,6 +75,7 @@ export interface Book {
   publicationYear?: number;
   editionYear?: number;
   isRecentlyUploaded?: boolean;
+  isBestSeller?: boolean;
   uploadedAt?: string;
   badge?: string;
   coverGradient: {
@@ -33,6 +87,8 @@ export interface Book {
   coverPattern: string;
   description: string;
   keyTakeaways: string[];
+  tableOfContents?: TableOfContentItem[];
+  reviews?: BookReview[];
 }
 
 export interface CategoryInfo {

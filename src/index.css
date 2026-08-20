@@ -6,6 +6,8 @@
     --font-subheading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-sf-mono: "SF Mono", Monaco, Menlo, Consolas, "JetBrains Mono", monospace;
+    --dodger-blue: #1E90FF;
+    --dodger-blue-hover: #0077ED;
   }
 
   html {
@@ -21,8 +23,8 @@
   body {
     font-family: var(--font-body);
     font-weight: 400;
-    color: #0F172A;
-    background-color: #F8FAFC;
+    color: #F1F5F9;
+    background-color: #0B0F19;
     font-size: 1rem; /* 16px standard baseline */
     line-height: 1.6;
     letter-spacing: -0.011em;
@@ -56,6 +58,18 @@
   input, select, textarea {
     font-family: var(--font-body);
   }
+}
+
+.text-dodgerblue {
+  color: #1E90FF;
+}
+
+.bg-dodgerblue {
+  background-color: #1E90FF;
+}
+
+.border-dodgerblue {
+  border-color: #1E90FF;
 }
 
 /* Custom font helper classes */
