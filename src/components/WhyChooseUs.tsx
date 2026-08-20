@@ -61,45 +61,45 @@ export const WhyChooseUs: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-slate-900 tracking-tight">
             Why Choose MidusaElibrary
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1.5">
+          <p className="text-sm sm:text-base font-subheading font-semibold text-slate-600 mt-2">
             Quality digital reading engineered for modern learners and professionals.
           </p>
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {features.map((feat) => {
             const Icon = feat.icon;
             return (
               <div
                 key={feat.id}
-                className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:shadow-sm hover:border-blue-300 transition-all flex flex-col justify-between"
+                className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs hover:shadow-sm hover:border-blue-300 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div 
-                    className="w-10 h-10 rounded-xl flex items-center justify-center mb-3.5"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                     style={{ 
                       backgroundColor: `${feat.accent}15`,
                       color: feat.accent,
                     }}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-6 h-6" />
                   </div>
 
-                  <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1">
+                  <h3 className="text-base sm:text-lg font-heading font-bold text-slate-900 mb-1.5">
                     {feat.title}
                   </h3>
 
-                  <p className="text-xs text-slate-500 leading-relaxed">
+                  <p className="text-sm font-body font-normal text-slate-600 leading-relaxed">
                     {feat.description}
                   </p>
                 </div>
 
-                <div className="pt-3 mt-4 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-slate-500 font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <div className="pt-3.5 mt-4 border-t border-slate-100 flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-body font-normal">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   <span>Guaranteed Quality</span>
                 </div>
               </div>

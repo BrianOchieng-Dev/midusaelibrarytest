@@ -40,56 +40,56 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="lg:col-span-7 text-center lg:text-left space-y-4 sm:space-y-5">
             
             {/* Slogan Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-xs shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span className="font-semibold">Knowledge should not be that expensive</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-sm shadow-md border border-slate-800">
+              <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+              <span className="font-subheading font-semibold text-slate-100">Knowledge should not be that expensive</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+            {/* Main Headline -> SF Pro Display Bold */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-slate-900 leading-[1.12]">
               Curated Bestsellers for{' '}
               <span className="text-blue-600">
                 Ambitious Minds
               </span>
             </h1>
 
-            {/* Concise Subheadline */}
-            <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Explore handpicked titles across <span className="font-semibold text-slate-800">Self Development</span>, <span className="font-semibold text-slate-800">Business</span>, <span className="font-semibold text-slate-800">Psychology</span>, <span className="font-semibold text-slate-800">Finance</span>, and <span className="font-semibold text-slate-800">Entrepreneurship</span>. Instant M-Pesa prompt and unique download links sent directly to your account.
+            {/* Concise Subheadline -> Outfit SemiBold / Inter */}
+            <p className="text-base sm:text-lg text-slate-600 font-body font-normal max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Explore handpicked titles across <span className="font-subheading font-semibold text-slate-900">Self Development</span>, <span className="font-subheading font-semibold text-slate-900">Business</span>, <span className="font-subheading font-semibold text-slate-900">Psychology</span>, <span className="font-subheading font-semibold text-slate-900">Finance</span>, and <span className="font-subheading font-semibold text-slate-900">Entrepreneurship</span>. Instant M-Pesa prompt and unique download links sent directly to your account.
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons -> Inter Medium */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1">
               <button
                 onClick={onBrowseBooks}
-                className="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 flex items-center gap-2 transition-transform active:scale-95 cursor-pointer"
+                className="px-6 py-3.5 rounded-xl font-body font-medium text-sm sm:text-base bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 flex items-center gap-2.5 transition-transform active:scale-95 cursor-pointer"
               >
-                <BookOpen className="w-4 h-4 text-white" />
-                <span>Browse All Books</span>
-                <ArrowRight className="w-4 h-4 text-white" />
+                <BookOpen className="w-5 h-5 text-white" />
+                <span>Browse Recent Drops & Books</span>
+                <ArrowRight className="w-5 h-5 text-white" />
               </button>
 
               <button
                 onClick={() => onBuyNow(activeBook)}
-                className="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs flex items-center gap-2 transition-transform active:scale-95 cursor-pointer"
+                className="px-6 py-3.5 rounded-xl font-body font-medium text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs flex items-center gap-2.5 transition-transform active:scale-95 cursor-pointer"
               >
-                <Smartphone className="w-4 h-4" />
-                <span>Buy Now (M-Pesa)</span>
+                <Smartphone className="w-5 h-5" />
+                <span>Buy Now (100 KES M-Pesa)</span>
               </button>
             </div>
 
             {/* Simple Trust Features */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-1 text-xs text-slate-500">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-5 pt-2 text-sm text-slate-600 font-medium">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span>Instant M-Pesa Prompt</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-blue-600" />
                 <span>Unique Account Download Link</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 text-amber-500" />
+              <div className="flex items-center gap-2">
+                <Zap className="w-4 h-4 text-amber-500" />
                 <span>Lifetime Access</span>
               </div>
             </div>
@@ -119,18 +119,18 @@ export const Hero: React.FC<HeroProps> = ({
                 <BookCover book={activeBook} size="hero" />
 
                 {/* Floating Badge Over Book */}
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-11/12 p-2.5 rounded-xl bg-white/95 border border-slate-200 shadow-lg backdrop-blur-md flex items-center justify-between z-20">
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-11/12 p-3 rounded-xl bg-white/95 border border-slate-200 shadow-lg backdrop-blur-md flex items-center justify-between z-20">
                   <div>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-blue-600 font-mono">
+                    <span className="text-xs uppercase font-bold tracking-wider text-blue-600 font-mono">
                       Featured Title
                     </span>
-                    <p className="text-xs font-bold text-slate-900 truncate max-w-[140px] sm:max-w-[170px]">
+                    <p className="text-sm font-bold text-slate-900 truncate max-w-[150px] sm:max-w-[190px]">
                       {activeBook.title}
                     </p>
                   </div>
 
                   <div className="text-right">
-                    <span className="text-xs font-bold text-blue-600">
+                    <span className="text-sm sm:text-base font-extrabold text-blue-600">
                       {formatPrice(activeBook.priceKES)}
                     </span>
                   </div>
@@ -140,15 +140,15 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Category Selector Chips */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 mt-5 z-10">
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-6 z-10">
               {featuredBooks.slice(0, 5).map((book, idx) => (
                 <button
                   key={book.id}
                   onClick={() => setActiveHeroIdx(idx)}
-                  className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                     activeHeroIdx === idx
                       ? 'bg-blue-600 text-white shadow-xs border border-blue-600'
-                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                      : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
                   }`}
                 >
                   {book.category}

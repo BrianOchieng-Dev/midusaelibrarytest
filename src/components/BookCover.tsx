@@ -74,14 +74,14 @@ export const BookCover: React.FC<BookCoverProps> = ({
       {showBadge && book.badge && (
         <div className="absolute top-3 right-3 z-10">
           <span 
-            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md shadow-lg"
+            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-lg"
             style={{
               backgroundColor: 'rgba(10, 15, 30, 0.85)',
               color: book.coverGradient.accent,
               border: `1px solid ${book.coverGradient.accent}66`,
             }}
           >
-            <Sparkles className="w-2.5 h-2.5" />
+            <Sparkles className="w-3 h-3" />
             {book.badge}
           </span>
         </div>
@@ -94,12 +94,12 @@ export const BookCover: React.FC<BookCoverProps> = ({
         {/* Header: Midusa Logo / Category Pill */}
         <div>
           <div className={`flex items-center justify-between gap-1 ${size === 'xs' ? 'mb-1' : 'mb-2'}`}>
-            <div className="flex items-center gap-1 opacity-90">
+            <div className="flex items-center gap-1.5 opacity-90">
               <div className={`rounded-md bg-white/10 backdrop-blur-sm ${size === 'xs' ? 'p-0.5' : 'p-1'}`}>
                 {getCategoryIcon()}
               </div>
-              <span className={`font-semibold uppercase tracking-wider text-slate-300 ${
-                size === 'xs' ? 'text-[8px]' : 'text-[11px]'
+              <span className={`font-semibold uppercase tracking-wider text-slate-200 ${
+                size === 'xs' ? 'text-[9px]' : 'text-xs'
               }`}>
                 {book.category}
               </span>
@@ -115,49 +115,49 @@ export const BookCover: React.FC<BookCoverProps> = ({
           <h4 
             className={`font-bold tracking-tight text-white leading-snug drop-shadow-md ${
               size === 'xs' 
-                ? 'text-[10px] line-clamp-2 leading-tight' 
+                ? 'text-xs line-clamp-2 leading-tight' 
                 : size === 'sm' 
-                ? 'text-sm line-clamp-3' 
+                ? 'text-sm sm:text-base line-clamp-3' 
                 : size === 'hero' 
-                ? 'text-xl sm:text-2xl line-clamp-3' 
-                : 'text-base sm:text-lg line-clamp-3'
+                ? 'text-xl sm:text-2xl lg:text-3xl line-clamp-3' 
+                : 'text-base sm:text-lg lg:text-xl line-clamp-3'
             }`}
           >
             {book.title}
           </h4>
 
           {size !== 'sm' && size !== 'xs' && (
-            <p className="text-[11px] text-slate-300/90 mt-1 line-clamp-2 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-200/90 mt-1.5 line-clamp-2 leading-relaxed">
               {book.subtitle}
             </p>
           )}
         </div>
 
         {/* Footer: Author & Formats */}
-        <div className={`border-t border-white/10 mt-auto ${size === 'xs' ? 'pt-1' : 'pt-2'}`}>
+        <div className={`border-t border-white/10 mt-auto ${size === 'xs' ? 'pt-1' : 'pt-2.5'}`}>
           <div className="flex items-center justify-between text-xs text-slate-200">
             <div>
               {size !== 'xs' && (
-                <p className="text-[10px] text-slate-400 uppercase tracking-widest font-mono">Author</p>
+                <p className="text-xs text-slate-400 uppercase tracking-widest font-mono">Author</p>
               )}
               <p className={`font-semibold text-white truncate ${
-                size === 'xs' ? 'text-[9px] max-w-[50px]' : 'text-xs max-w-[120px] sm:max-w-[150px]'
+                size === 'xs' ? 'text-[10px] max-w-[50px]' : 'text-xs sm:text-sm max-w-[120px] sm:max-w-[150px]'
               }`}>
                 {book.author}
               </p>
             </div>
             
             <div className={`flex items-center gap-1 text-amber-300 font-semibold bg-black/40 rounded backdrop-blur-sm ${
-              size === 'xs' ? 'text-[9px] px-1 py-0.2' : 'text-xs px-1.5 py-0.5'
+              size === 'xs' ? 'text-[10px] px-1 py-0.5' : 'text-xs sm:text-sm px-2 py-0.5'
             }`}>
-              <Star className={`${size === 'xs' ? 'w-2 h-2' : 'w-3 h-3'} fill-amber-400 text-amber-400`} />
+              <Star className={`${size === 'xs' ? 'w-2.5 h-2.5' : 'w-3.5 h-3.5'} fill-amber-400 text-amber-400`} />
               <span>{book.rating}</span>
             </div>
           </div>
 
           {/* Midusa Edition Watermark */}
           {size !== 'xs' && (
-            <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/5 text-[9px] text-slate-400 tracking-wider font-mono">
+            <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/5 text-[10px] text-slate-400 tracking-wider font-mono">
               <span>MIDUSA DIGITAL</span>
               <span>{book.publicationYear} ED.</span>
             </div>

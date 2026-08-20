@@ -20,6 +20,10 @@ export interface Book {
   pages: number;
   fileSize: string;
   publicationYear?: number;
+  editionYear?: number;
+  isRecentlyUploaded?: boolean;
+  uploadedAt?: string;
+  badge?: string;
   coverGradient: {
     from: string;
     via?: string;

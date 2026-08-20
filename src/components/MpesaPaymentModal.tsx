@@ -190,16 +190,16 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
       <div className="relative w-full max-w-lg bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden z-10 animate-scaleIn my-auto">
         
         {/* Header */}
-        <div className="px-5 sm:px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+        <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shadow-xs">
               M
             </div>
             <div>
-              <h3 className="font-extrabold text-sm sm:text-base text-slate-900">
+              <h3 className="font-extrabold text-base sm:text-lg text-slate-900">
                 {step === 'success' ? 'Payment Confirmed' : 'Lipa na M-Pesa'}
               </h3>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-xs text-slate-500">
                 {step === 'success' ? 'Unique PDF download link ready' : 'Direct STK Push Prompt'}
               </p>
             </div>
@@ -208,7 +208,7 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
           {step !== 'push_sent' && (
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -216,30 +216,30 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="p-5 sm:p-6 space-y-5">
+        <div className="p-6 space-y-5">
           
           {/* STEP 1: Phone Input */}
           {step === 'input' && (
             <form onSubmit={handleInitiatePayment} className="space-y-4">
               
               {/* Order Summary Box */}
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3.5">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-4">
                 <div className="shrink-0">
                   <BookCover book={booksToBuy[0]} size="xs" showBadge={false} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-[10px] uppercase font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
+                  <span className="text-xs uppercase font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-100">
                     {booksToBuy.length > 1 ? `${booksToBuy.length} eBooks Selected` : booksToBuy[0].category}
                   </span>
-                  <h4 className="font-bold text-xs sm:text-sm text-slate-900 truncate mt-1">
+                  <h4 className="font-bold text-sm sm:text-base text-slate-900 truncate mt-1">
                     {booksToBuy.length > 1 ? `${booksToBuy[0].title} + ${booksToBuy.length - 1} more` : booksToBuy[0].title}
                   </h4>
-                  <p className="text-[11px] text-slate-500 truncate">
+                  <p className="text-xs text-slate-500 truncate">
                     By {booksToBuy[0].author}
                   </p>
-                  <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-slate-200/60">
-                    <span className="text-xs text-slate-600 font-medium">Total to Pay:</span>
-                    <span className="text-sm font-extrabold text-emerald-700">
+                  <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-200/60">
+                    <span className="text-xs sm:text-sm text-slate-600 font-medium">Total to Pay:</span>
+                    <span className="text-base font-extrabold text-emerald-700">
                       {formatPrice(totalAmountKES)}
                     </span>
                   </div>
@@ -248,12 +248,12 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
 
               {/* Phone Input Field */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-bold text-slate-700">
+                <label className="block text-sm font-bold text-slate-700">
                   Enter M-Pesa Phone Number
                 </label>
                 <div className="relative">
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-slate-500 font-semibold text-xs border-r border-slate-200 pr-2.5">
-                    <Smartphone className="w-4 h-4 text-emerald-600" />
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-slate-600 font-semibold text-sm border-r border-slate-200 pr-2.5">
+                    <Smartphone className="w-4.5 h-4.5 text-emerald-600" />
                     <span>+254</span>
                   </div>
                   <input
@@ -264,7 +264,7 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
                       setPhoneNumber(e.target.value);
                       if (phoneError) setPhoneError('');
                     }}
-                    className={`w-full pl-24 pr-4 py-2.5 bg-slate-50 border rounded-xl text-sm font-semibold text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none transition-colors ${
+                    className={`w-full pl-24 pr-4 py-3 bg-slate-50 border rounded-xl text-base font-semibold text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none transition-colors ${
                       phoneError
                         ? 'border-rose-500 focus:ring-1 focus:ring-rose-500'
                         : 'border-slate-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600'
@@ -273,17 +273,17 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
                   />
                 </div>
                 {phoneError ? (
-                  <p className="text-[11px] text-rose-600 font-medium">{phoneError}</p>
+                  <p className="text-xs text-rose-600 font-medium">{phoneError}</p>
                 ) : (
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-xs text-slate-500">
                     An STK push payment prompt will be sent immediately to this phone.
                   </p>
                 )}
               </div>
 
               {/* Security Guarantee */}
-              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-emerald-50/60 border border-emerald-100 text-[11px] text-emerald-800">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-emerald-50/60 border border-emerald-100 text-xs text-emerald-800">
+                <ShieldCheck className="w-4.5 h-4.5 text-emerald-600 shrink-0" />
                 <span>Instant STK push notification • Secure M-Pesa PIN prompt</span>
               </div>
 
@@ -291,16 +291,16 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
               <button
                 type="submit"
                 disabled={isProcessing}
-                className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 transition-transform active:scale-98 disabled:opacity-75 cursor-pointer"
+                className="w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 disabled:opacity-75 cursor-pointer"
               >
                 {isProcessing ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-5 h-5 animate-spin" />
                     <span>Sending M-Pesa Prompt...</span>
                   </>
                 ) : (
                   <>
-                    <Lock className="w-4 h-4" />
+                    <Lock className="w-4.5 h-4.5" />
                     <span>Pay {formatPrice(totalAmountKES)} via M-Pesa</span>
                   </>
                 )}
@@ -315,36 +315,36 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
               {/* Phone Prompt Simulation Graphic */}
               <div className="relative mx-auto w-20 h-20 rounded-3xl bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-inner">
                 <Smartphone className="w-10 h-10 animate-bounce" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
+                <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-emerald-600 text-white text-xs font-bold flex items-center justify-center ring-2 ring-white">
                   1
                 </span>
               </div>
 
               <div className="space-y-1.5">
-                <h4 className="text-base font-extrabold text-slate-900">
+                <h4 className="text-lg font-extrabold text-slate-900">
                   Prompt Sent to {phoneNumber}
                 </h4>
-                <p className="text-xs text-slate-600 max-w-xs mx-auto leading-relaxed">
+                <p className="text-sm text-slate-600 max-w-xs mx-auto leading-relaxed">
                   Please check your phone screen right now. Enter your <strong>M-Pesa PIN</strong> to authorize the <strong>{formatPrice(totalAmountKES)}</strong> payment.
                 </p>
               </div>
 
               {/* Step checklist */}
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-left space-y-2 text-xs">
-                <div className="flex items-center gap-2 text-slate-700">
-                  <div className="w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-left space-y-2.5 text-xs sm:text-sm">
+                <div className="flex items-center gap-2.5 text-slate-700">
+                  <div className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
                     ✓
                   </div>
                   <span>STK push prompt dispatched to phone</span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-700">
-                  <div className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                <div className="flex items-center gap-2.5 text-slate-700">
+                  <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
                     2
                   </div>
                   <span>Enter your 4-digit M-Pesa PIN & press OK</span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-500">
-                  <div className="w-4 h-4 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px] font-bold shrink-0">
+                <div className="flex items-center gap-2.5 text-slate-500">
+                  <div className="w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0">
                     3
                   </div>
                   <span>Unique download link is generated & saved to profile</span>
@@ -352,35 +352,35 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
               </div>
 
               {/* Interactive Simulation / Auto-Approval Button */}
-              <div className="space-y-2 pt-1">
+              <div className="space-y-2.5 pt-1">
                 <button
                   type="button"
                   onClick={handleConfirmPayment}
                   disabled={isProcessing}
-                  className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-md flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-md flex items-center justify-center gap-2.5 transition-all active:scale-98 cursor-pointer"
                 >
                   {isProcessing ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-5 h-5 animate-spin" />
                       <span>Verifying M-Pesa PIN Transaction...</span>
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 className="w-4 h-4" />
+                      <CheckCircle2 className="w-5 h-5" />
                       <span>I have entered my PIN / Confirm Payment</span>
                     </>
                   )}
                 </button>
 
-                <div className="flex items-center justify-between text-xs text-slate-400 px-1">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
+                <div className="flex items-center justify-between text-xs sm:text-sm text-slate-500 px-1">
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="w-4 h-4" />
                     Waiting for confirmation: {countdown}s
                   </span>
                   <button
                     type="button"
                     onClick={() => setStep('input')}
-                    className="text-blue-600 hover:underline text-[11px]"
+                    className="text-blue-600 hover:underline text-xs font-medium cursor-pointer"
                   >
                     Change Phone Number
                   </button>
@@ -395,61 +395,61 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
             <div className="space-y-4 text-center animate-fadeIn">
               
               {/* Success Badge */}
-              <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-xs">
-                <CheckCircle2 className="w-8 h-8" />
+              <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-xs">
+                <CheckCircle2 className="w-9 h-9" />
               </div>
 
               <div className="space-y-1">
-                <h4 className="text-lg font-extrabold text-slate-900">
+                <h4 className="text-xl font-extrabold text-slate-900">
                   Payment Successful!
                 </h4>
-                <p className="text-xs text-slate-600">
+                <p className="text-sm text-slate-600">
                   M-Pesa Receipt: <span className="font-mono font-bold text-slate-900">{generatedReceipt}</span> • {formatPrice(totalAmountKES)}
                 </p>
               </div>
 
               {/* Unique Download Link Box */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-left space-y-3">
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 text-left space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                  <span className="text-xs sm:text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-blue-600" />
                     Your Unique PDF Download Link
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">
+                  <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">
                     Active & Verified
                   </span>
                 </div>
 
                 {/* Unique Token Link display */}
-                <div className="flex items-center gap-2 p-2 rounded-xl bg-white border border-slate-200">
+                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200">
                   <input
                     type="text"
                     readOnly
                     value={getDownloadUrl(generatedToken, booksToBuy[0].id)}
-                    className="w-full text-xs font-mono text-slate-700 bg-transparent outline-none truncate"
+                    className="w-full text-xs sm:text-sm font-mono text-slate-700 bg-transparent outline-none truncate"
                   />
                   <button
                     onClick={() => handleCopyLink(getDownloadUrl(generatedToken, booksToBuy[0].id))}
-                    className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors"
+                    className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors cursor-pointer"
                     title="Copy unique download link"
                   >
-                    {copiedLink ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                    {copiedLink ? <Check className="w-4.5 h-4.5 text-emerald-600" /> : <Copy className="w-4.5 h-4.5" />}
                   </button>
                 </div>
 
-                <p className="text-[11px] text-slate-500 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   ✓ This unique download link has been <strong>automatically sent and saved to your Account Profile page</strong> for permanent lifetime access.
                 </p>
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-2 pt-1">
+              <div className="space-y-2.5 pt-1">
                 {/* 1. Direct Download Button */}
                 <button
                   onClick={() => handleDownloadNow(booksToBuy[0])}
-                  className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-md flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-md flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-5 h-5" />
                   <span>Download PDF Now</span>
                 </button>
 
@@ -459,16 +459,16 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
                     onClose();
                     onNavigateToProfile();
                   }}
-                  className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-xs flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base bg-blue-600 hover:bg-blue-700 text-white shadow-xs flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
                 >
-                  <User className="w-4 h-4" />
+                  <User className="w-5 h-5" />
                   <span>View in Account Profile & Library</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-5 h-5" />
                 </button>
 
                 <button
                   onClick={onClose}
-                  className="text-xs text-slate-500 hover:text-slate-800 font-semibold pt-1"
+                  className="text-sm text-slate-500 hover:text-slate-800 font-semibold pt-1 cursor-pointer"
                 >
                   Close & Continue Browsing
                 </button>

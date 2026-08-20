@@ -83,14 +83,14 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
         <div className="flex flex-wrap items-center justify-between gap-3 py-4 mb-6 border-b border-slate-200">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 shadow-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 shadow-xs transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-4 h-4 text-blue-600" />
+            <ArrowLeft className="w-4.5 h-4.5 text-blue-600" />
             <span>Back to Catalog</span>
           </button>
 
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-1.5 text-xs text-slate-500 overflow-hidden">
+          <nav className="flex items-center gap-2 text-sm text-slate-500 overflow-hidden">
             <button 
               onClick={onBack}
               className="hover:text-blue-600 transition-colors cursor-pointer"
@@ -98,9 +98,9 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               Home
             </button>
             <span>/</span>
-            <span className="text-slate-600">{book.category}</span>
+            <span className="text-slate-600 font-medium">{book.category}</span>
             <span>/</span>
-            <span className="font-semibold text-slate-900 truncate max-w-[180px] sm:max-w-xs">
+            <span className="font-bold text-slate-900 truncate max-w-[200px] sm:max-w-sm">
               {book.title}
             </span>
           </nav>
@@ -122,39 +122,39 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               </div>
 
               {/* Badges Under Cover */}
-              <div className="flex items-center justify-center gap-3 mt-6 pt-4 border-t border-slate-100 w-full text-xs text-slate-500">
-                <div className="flex items-center gap-1">
-                  <FileText className="w-3.5 h-3.5 text-blue-600" />
+              <div className="flex items-center justify-center gap-3.5 mt-6 pt-4 border-t border-slate-100 w-full text-xs sm:text-sm text-slate-600 font-medium">
+                <div className="flex items-center gap-1.5">
+                  <FileText className="w-4 h-4 text-blue-600" />
                   <span className="font-mono">{book.fileSize}</span>
                 </div>
                 <span>•</span>
-                <div className="flex items-center gap-1">
-                  <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+                <div className="flex items-center gap-1.5">
+                  <BookOpen className="w-4 h-4 text-blue-600" />
                   <span>{book.pages} Pages</span>
                 </div>
                 <span>•</span>
-                <span className="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold font-mono text-[10px]">
+                <span className="px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 font-bold font-mono text-xs">
                   PDF
                 </span>
               </div>
             </div>
 
             {/* Actions Card */}
-            <div className="w-full max-w-sm mt-4 p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
+            <div className="w-full max-w-sm mt-5 p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3.5">
               
               {/* Primary Buy Now with M-Pesa Button */}
               <button
                 onClick={() => onBuyNow(book)}
-                className="w-full py-3.5 px-4 rounded-xl font-bold text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 transition-transform active:scale-98 cursor-pointer"
+                className="w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 cursor-pointer"
               >
-                <Smartphone className="w-4 h-4" />
+                <Smartphone className="w-5 h-5" />
                 <span>Buy Now with M-Pesa ({formatPrice(book.priceKES)})</span>
               </button>
 
               {/* Add to Cart Button */}
               <button
                 onClick={handleAddToCartClick}
-                className={`w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer ${
+                className={`w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer ${
                   isAdded
                     ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                     : 'bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 shadow-xs'
@@ -162,12 +162,12 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               >
                 {isAdded ? (
                   <>
-                    <Check className="w-4 h-4 text-emerald-600" />
+                    <Check className="w-4.5 h-4.5 text-emerald-600" />
                     <span>Added to Cart!</span>
                   </>
                 ) : (
                   <>
-                    <ShoppingCart className="w-4 h-4 text-slate-600" />
+                    <ShoppingCart className="w-4.5 h-4.5 text-slate-600" />
                     <span>Add to Cart</span>
                   </>
                 )}
@@ -178,38 +178,38 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                 href={generateWhatsAppUrl(book.title)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 px-4 rounded-xl font-semibold text-xs text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm text-emerald-800 hover:text-emerald-900 bg-emerald-50/70 hover:bg-emerald-100/90 border border-emerald-200/80 flex items-center justify-center gap-2 transition-colors"
               >
-                <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+                <MessageSquare className="w-4 h-4 text-emerald-600" />
                 <span>Order via WhatsApp</span>
               </a>
 
               {/* Wishlist & Share Secondary Bar */}
-              <div className="grid grid-cols-2 gap-2 pt-1">
+              <div className="grid grid-cols-2 gap-2.5 pt-1">
                 <button
                   onClick={() => onToggleWishlist(book)}
-                  className={`py-2 px-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                  className={`py-2.5 px-3 rounded-xl border text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer ${
                     isWishlisted
                       ? 'bg-pink-50 border-pink-200 text-pink-600'
                       : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                   }`}
                 >
-                  <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-pink-600' : ''}`} />
+                  <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-pink-600' : ''}`} />
                   <span>{isWishlisted ? 'In Wishlist' : 'Save Book'}</span>
                 </button>
 
                 <button
                   onClick={handleShare}
-                  className="py-2 px-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  className="py-2.5 px-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-100 flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
                   {copiedLink ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <Check className="w-4 h-4 text-emerald-600" />
                       <span className="text-emerald-600">Link Copied!</span>
                     </>
                   ) : (
                     <>
-                      <Share2 className="w-3.5 h-3.5" />
+                      <Share2 className="w-4 h-4" />
                       <span>Share Link</span>
                     </>
                   )}
@@ -228,12 +228,12 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               
               {/* Category & Star Rating */}
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-100">
+                <span className="px-3.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs sm:text-sm font-bold border border-blue-100">
                   {book.category}
                 </span>
 
-                <div className="flex items-center gap-1.5 text-xs text-amber-500 font-semibold bg-amber-50/60 px-2.5 py-1 rounded-full border border-amber-100">
-                  <Star className="w-3.5 h-3.5 fill-amber-500" />
+                <div className="flex items-center gap-1.5 text-xs sm:text-sm text-amber-500 font-semibold bg-amber-50/60 px-3 py-1 rounded-full border border-amber-100">
+                  <Star className="w-4 h-4 fill-amber-500" />
                   <span>{book.rating}</span>
                   <span className="text-slate-400 font-normal">
                     ({book.reviewsCount} verified reader reviews)
@@ -246,35 +246,35 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
                   {book.title}
                 </h1>
-                <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
+                <p className="text-base sm:text-lg text-slate-600 mt-2 leading-relaxed">
                   {book.subtitle}
                 </p>
               </div>
 
               {/* Author & Specs Bar */}
-              <div className="pt-2 flex items-center gap-2 text-xs text-slate-600">
+              <div className="pt-2 flex items-center gap-2 text-sm text-slate-600">
                 <span>Written by</span>
-                <span className="font-bold text-slate-900">{book.author}</span>
+                <span className="font-bold text-slate-900 text-base">{book.author}</span>
               </div>
 
               {/* Price Banner */}
-              <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-100 flex flex-wrap items-center justify-between gap-4 mt-4">
+              <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-100 flex flex-wrap items-center justify-between gap-4 mt-4">
                 <div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                  <div className="flex items-baseline gap-2.5">
+                    <span className="text-3xl sm:text-4xl font-extrabold text-slate-900">
                       {formatPrice(book.priceKES)}
                     </span>
-                    <span className="text-xs sm:text-sm text-slate-400 line-through">
+                    <span className="text-sm sm:text-base text-slate-400 line-through">
                       {formatPrice(book.originalPriceKES)}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-600 mt-0.5">
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1">
                     Complete digital edition • Instant PDF delivery
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-emerald-700 font-semibold bg-emerald-100/70 px-3 py-1.5 rounded-xl border border-emerald-200">
-                  <Zap className="w-3.5 h-3.5 text-emerald-600" />
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-emerald-700 font-semibold bg-emerald-100/70 px-3.5 py-2 rounded-xl border border-emerald-200">
+                  <Zap className="w-4 h-4 text-emerald-600" />
                   <span>Unique Download Link</span>
                 </div>
               </div>
@@ -282,12 +282,12 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
             </div>
 
             {/* Detailed Synopsis / Overview */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-blue-600" />
+            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3.5">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2.5">
+                <BookOpen className="w-5 h-5 text-blue-600" />
                 <span>Book Description & Overview</span>
               </h2>
-              <div className="text-xs sm:text-sm text-slate-600 leading-relaxed space-y-3 pt-1">
+              <div className="text-sm sm:text-base text-slate-600 leading-relaxed space-y-3.5 pt-1">
                 <p>{book.description}</p>
                 <p>
                   This comprehensive eBook has been carefully formatted for digital reading on all screens, including smartphones, tablets, laptops, and e-readers. You receive the complete unabridged text in high-resolution PDF format.
@@ -297,21 +297,21 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
             {/* Key Takeaways Grid */}
             <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-4">
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2.5">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                 <span>What You Will Learn from this Book</span>
               </h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
                 {book.keyTakeaways.map((takeaway, idx) => (
                   <div 
                     key={idx} 
-                    className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3"
+                    className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3.5"
                   >
-                    <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {idx + 1}
                     </span>
-                    <p className="text-xs sm:text-sm text-slate-700 leading-snug">
+                    <p className="text-sm text-slate-700 leading-snug">
                       {takeaway}
                     </p>
                   </div>
@@ -321,39 +321,39 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
             {/* Specifications Card */}
             <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-4">
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
                 File Specifications & Compatibility
               </h2>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                  <span className="text-slate-400 block text-[10px] uppercase font-mono">Format</span>
-                  <span className="font-bold text-slate-900 mt-1 flex items-center gap-1">
-                    <FileText className="w-3.5 h-3.5 text-blue-600" />
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 text-xs sm:text-sm">
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                  <span className="text-slate-400 block text-xs uppercase font-mono">Format</span>
+                  <span className="font-bold text-slate-900 mt-1 flex items-center gap-1.5 text-sm">
+                    <FileText className="w-4 h-4 text-blue-600" />
                     PDF (Print / Screen)
                   </span>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                  <span className="text-slate-400 block text-[10px] uppercase font-mono">File Size</span>
-                  <span className="font-bold text-slate-900 mt-1 flex items-center gap-1">
-                    <Layers className="w-3.5 h-3.5 text-blue-600" />
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                  <span className="text-slate-400 block text-xs uppercase font-mono">File Size</span>
+                  <span className="font-bold text-slate-900 mt-1 flex items-center gap-1.5 text-sm">
+                    <Layers className="w-4 h-4 text-blue-600" />
                     {book.fileSize}
                   </span>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                  <span className="text-slate-400 block text-[10px] uppercase font-mono">Pages</span>
-                  <span className="font-bold text-slate-900 mt-1 flex items-center gap-1">
-                    <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                  <span className="text-slate-400 block text-xs uppercase font-mono">Pages</span>
+                  <span className="font-bold text-slate-900 mt-1 flex items-center gap-1.5 text-sm">
+                    <BookOpen className="w-4 h-4 text-blue-600" />
                     {book.pages} Pages
                   </span>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                  <span className="text-slate-400 block text-[10px] uppercase font-mono">Language</span>
-                  <span className="font-bold text-slate-900 mt-1 flex items-center gap-1">
-                    <Globe className="w-3.5 h-3.5 text-blue-600" />
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                  <span className="text-slate-400 block text-xs uppercase font-mono">Language</span>
+                  <span className="font-bold text-slate-900 mt-1 flex items-center gap-1.5 text-sm">
+                    <Globe className="w-4 h-4 text-blue-600" />
                     English
                   </span>
                 </div>
@@ -364,35 +364,35 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
             {relatedBooks.length > 0 && (
               <div className="pt-6 space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900">
                     More in {book.category}
                   </h3>
                   <button
                     onClick={onBack}
-                    className="text-xs text-blue-600 hover:underline font-semibold"
+                    className="text-sm text-blue-600 hover:underline font-semibold cursor-pointer"
                   >
                     View All
                   </button>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                   {relatedBooks.map((relBook) => (
                     <div
                       key={relBook.id}
                       onClick={() => onSelectBook(relBook)}
-                      className="group p-3 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between"
+                      className="group p-3.5 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between"
                     >
                       <div className="flex items-center justify-center p-2">
                         <BookCover book={relBook} size="sm" showBadge={false} />
                       </div>
-                      <div className="mt-2 text-left">
-                        <h4 className="font-bold text-xs text-slate-900 truncate group-hover:text-blue-600">
+                      <div className="mt-2.5 text-left">
+                        <h4 className="font-bold text-sm text-slate-900 truncate group-hover:text-blue-600">
                           {relBook.title}
                         </h4>
-                        <p className="text-[10px] text-slate-500 truncate">
+                        <p className="text-xs text-slate-500 truncate mt-0.5">
                           {relBook.author}
                         </p>
-                        <p className="text-xs font-bold text-blue-600 mt-1">
+                        <p className="text-sm font-bold text-blue-600 mt-1.5">
                           {formatPrice(relBook.priceKES)}
                         </p>
                       </div>

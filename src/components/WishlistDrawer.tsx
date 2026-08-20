@@ -95,14 +95,14 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
           {/* Header */}
           <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-slate-200 bg-slate-50/80 backdrop-blur-xs shrink-0">
             <div className="flex items-center gap-3">
-              <div className="p-2 sm:p-2.5 rounded-2xl bg-pink-100 text-pink-600 shadow-xs">
-                <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-pink-600" />
+              <div className="p-2.5 rounded-2xl bg-pink-100 text-pink-600 shadow-xs">
+                <Heart className="w-5 h-5 fill-pink-600" />
               </div>
               <div>
-                <h3 className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight">
+                <h3 className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight">
                   Saved Wishlist
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs sm:text-sm text-slate-500">
                   {wishlistBooks.length} {wishlistBooks.length === 1 ? 'eBook' : 'eBooks'} saved
                 </p>
               </div>
@@ -110,7 +110,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-colors"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-colors cursor-pointer"
               title="Close Wishlist (Esc)"
               aria-label="Close Wishlist"
             >
@@ -124,15 +124,15 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
               <div className="w-16 h-16 rounded-3xl bg-pink-50 text-pink-400 flex items-center justify-center shadow-xs border border-pink-100">
                 <Heart className="w-8 h-8" />
               </div>
-              <div className="space-y-1">
-                <h4 className="text-base font-bold text-slate-900">Your wishlist is empty</h4>
-                <p className="text-xs text-slate-500 max-w-xs leading-relaxed">
+              <div className="space-y-1.5">
+                <h4 className="text-lg font-bold text-slate-900">Your wishlist is empty</h4>
+                <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
                   Browse our catalog and click the heart icon on any eBook to save titles you plan to read later.
                 </p>
               </div>
               <button
                 onClick={onClose}
-                className="mt-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-xs flex items-center gap-2 transition-transform active:scale-95"
+                className="mt-2 px-6 py-3 rounded-xl font-bold text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-xs flex items-center gap-2 transition-transform active:scale-95 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Explore Catalog</span>
@@ -146,7 +146,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                 return (
                   <div
                     key={book.id}
-                    className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex gap-3.5 sm:gap-4 items-center"
+                    className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex gap-4 items-center"
                   >
                     {/* Book Thumbnail */}
                     <div className="shrink-0 flex items-center justify-center">
@@ -164,7 +164,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                           {/* Remove from wishlist */}
                           <button
                             onClick={() => onRemoveWishlist(book.id)}
-                            className="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition-colors"
+                            className="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition-colors cursor-pointer"
                             title="Remove from saved books"
                             aria-label={`Remove ${book.title}`}
                           >
@@ -173,26 +173,26 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                         </div>
 
                         {/* Title */}
-                        <h4 className="font-bold text-xs sm:text-sm text-slate-900 truncate mt-1">
+                        <h4 className="font-bold text-sm sm:text-base text-slate-900 truncate mt-1">
                           {book.title}
                         </h4>
 
                         {/* Author */}
-                        <p className="text-[11px] text-slate-500 truncate">
+                        <p className="text-xs text-slate-500 truncate">
                           By {book.author}
                         </p>
                       </div>
 
                       {/* Price & Move to Cart Button */}
                       <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-100">
-                        <span className="text-xs sm:text-sm font-extrabold text-slate-900">
+                        <span className="text-sm font-extrabold text-slate-900">
                           {formatPrice(book.priceKES)}
                         </span>
 
                         <button
                           onClick={() => handleMoveToCart(book)}
                           disabled={isMoved}
-                          className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all active:scale-95 ${
+                          className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-xs transition-all active:scale-95 cursor-pointer ${
                             isMoved
                               ? 'bg-emerald-600 text-white'
                               : 'bg-blue-600 hover:bg-blue-700 text-white'
@@ -200,12 +200,12 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                         >
                           {isMoved ? (
                             <>
-                              <Check className="w-3.5 h-3.5" />
+                              <Check className="w-4 h-4" />
                               <span>Moved!</span>
                             </>
                           ) : (
                             <>
-                              <ShoppingCart className="w-3.5 h-3.5" />
+                              <ShoppingCart className="w-4 h-4" />
                               <span>Move to Cart</span>
                             </>
                           )}
@@ -220,12 +220,12 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
 
           {/* Footer Summary / Batch Actions */}
           {wishlistBooks.length > 0 && (
-            <div className="p-4 sm:p-6 border-t border-slate-200 bg-slate-50/80 backdrop-blur-xs shrink-0 space-y-3">
+            <div className="p-4 sm:p-6 border-t border-slate-200 bg-slate-50/80 backdrop-blur-xs shrink-0 space-y-3.5">
               <div className="flex items-center justify-between text-xs sm:text-sm">
                 <span className="text-slate-500 font-medium">
                   Total Wishlist Value ({wishlistBooks.length} items):
                 </span>
-                <span className="font-extrabold text-slate-900 text-sm sm:text-base">
+                <span className="font-extrabold text-slate-900 text-base sm:text-lg">
                   {formatPrice(totalValueKES)}
                 </span>
               </div>
@@ -234,18 +234,18 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                 <button
                   onClick={handleMoveAllToCart}
                   disabled={isMovingAll}
-                  className="flex-1 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-sm flex items-center justify-center gap-2 transition-all active:scale-98"
+                  className="flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base bg-blue-600 hover:bg-blue-700 text-white shadow-sm flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
                 >
-                  <ShoppingCart className="w-4 h-4" />
+                  <ShoppingCart className="w-4.5 h-4.5" />
                   <span>Move All ({wishlistBooks.length}) to Cart</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4.5 h-4.5" />
                 </button>
               </div>
 
               <div className="text-center pt-1">
                 <button
                   onClick={onClose}
-                  className="text-xs text-slate-500 hover:text-slate-800 font-semibold"
+                  className="text-xs sm:text-sm text-slate-500 hover:text-slate-800 font-semibold cursor-pointer"
                 >
                   Continue Browsing
                 </button>

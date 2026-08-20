@@ -3,6 +3,7 @@ import { Book, BookCategory, CartItem, UserProfile, AppView, PurchasedBook, Orde
 import { BOOKS_DATA } from './data/booksData';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { RecentlyUploadedSection } from './components/RecentlyUploadedSection';
 import { CategoriesSection } from './components/CategoriesSection';
 import { FeaturedBooks } from './components/FeaturedBooks';
 import { WhyChooseUs } from './components/WhyChooseUs';
@@ -342,12 +343,22 @@ export default function App() {
             {/* 1. Hero Section */}
             <Hero
               featuredBooks={BOOKS_DATA}
-              onBrowseBooks={() => handleScrollToSection('catalog')}
+              onBrowseBooks={() => handleScrollToSection('recent-uploads')}
               onPreviewBook={handleSelectBook}
               onBuyNow={handleStartBuyNow}
             />
 
-            {/* 2. Categories Section */}
+            {/* 2. Recently Uploaded Books & Imposed Slogan Showcase */}
+            <RecentlyUploadedSection
+              books={BOOKS_DATA}
+              onPreviewBook={handleSelectBook}
+              onBuyNow={handleStartBuyNow}
+              onAddToCart={handleAddToCart}
+              onToggleWishlist={handleToggleWishlist}
+              wishlistIds={wishlistIds}
+            />
+
+            {/* 3. Categories Section */}
             <CategoriesSection
               onSelectCategory={setSelectedCategory}
               selectedCategory={selectedCategory}

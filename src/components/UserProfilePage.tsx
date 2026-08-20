@@ -164,14 +164,14 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
         <div className="flex items-center justify-between py-4 mb-6 border-b border-slate-200">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 shadow-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 shadow-xs transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-4 h-4 text-blue-600" />
+            <ArrowLeft className="w-4.5 h-4.5 text-blue-600" />
             <span>Back to Store</span>
           </button>
 
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs sm:text-sm font-semibold">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
             <span>Account Profile & Library</span>
           </div>
         </div>
@@ -186,21 +186,21 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                 <img
                   src={currentUser.avatar}
                   alt={currentUser.name}
-                  className="w-16 h-16 rounded-2xl object-cover ring-4 ring-blue-50 border border-slate-200"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover ring-4 ring-blue-50 border border-slate-200"
                 />
                 <div>
-                  <div className="flex items-center gap-2">
-                    <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                  <div className="flex items-center gap-2.5">
+                    <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
                       {currentUser.name}
                     </h1>
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <span className="px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
                       Verified Member
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 mt-0.5">
+                  <p className="text-sm text-slate-500 mt-0.5">
                     {currentUser.email}
                   </p>
-                  <div className="flex items-center gap-3 mt-2 text-xs text-slate-600">
+                  <div className="flex items-center gap-3 mt-2 text-xs sm:text-sm text-slate-600">
                     <span className="font-semibold text-blue-600">
                       {purchasedBooks.length} Purchased {purchasedBooks.length === 1 ? 'eBook' : 'eBooks'}
                     </span>
@@ -213,9 +213,9 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={onLogout}
-                  className="py-2.5 px-4 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 border border-rose-200/80 flex items-center justify-center gap-2 transition-colors w-full sm:w-auto cursor-pointer"
+                  className="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold text-rose-600 hover:bg-rose-50 border border-rose-200/80 flex items-center justify-center gap-2 transition-colors w-full sm:w-auto cursor-pointer"
                 >
-                  <LogOut className="w-3.5 h-3.5" />
+                  <LogOut className="w-4 h-4" />
                   <span>Sign Out</span>
                 </button>
               </div>
@@ -225,37 +225,37 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white border border-slate-200 shadow-xs overflow-x-auto">
               <button
                 onClick={() => setActiveTab('library')}
-                className={`flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                className={`flex-1 min-w-[160px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   activeTab === 'library'
                     ? 'bg-blue-600 text-white shadow-xs'
                     : 'text-slate-600 hover:bg-slate-50'
                 }`}
               >
-                <BookOpen className="w-4 h-4" />
-                <span>My eBooks & Download Links ({purchasedBooks.length})</span>
+                <BookOpen className="w-4.5 h-4.5" />
+                <span>My eBooks & Links ({purchasedBooks.length})</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('wishlist')}
-                className={`flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   activeTab === 'wishlist'
                     ? 'bg-blue-600 text-white shadow-xs'
                     : 'text-slate-600 hover:bg-slate-50'
                 }`}
               >
-                <Heart className="w-4 h-4" />
+                <Heart className="w-4.5 h-4.5" />
                 <span>Wishlist ({wishlistBooks.length})</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('orders')}
-                className={`flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   activeTab === 'orders'
                     ? 'bg-blue-600 text-white shadow-xs'
                     : 'text-slate-600 hover:bg-slate-50'
                 }`}
               >
-                <Receipt className="w-4 h-4" />
+                <Receipt className="w-4.5 h-4.5" />
                 <span>Order History ({orderTransactions.length})</span>
               </button>
             </div>
@@ -265,10 +265,10 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-base sm:text-lg font-bold text-slate-900">
+                    <h2 className="text-lg sm:text-xl font-bold text-slate-900">
                       Your Purchased eBooks
                     </h2>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                       Each eBook includes your verified M-Pesa receipt and a secure unique download link.
                     </p>
                   </div>
@@ -279,15 +279,15 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                     <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto border border-blue-100">
                       <BookOpen className="w-8 h-8" />
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="font-extrabold text-slate-900 text-base">No Purchased eBooks Yet</h3>
-                      <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
+                    <div className="space-y-1.5">
+                      <h3 className="font-extrabold text-slate-900 text-lg">No Purchased eBooks Yet</h3>
+                      <p className="text-sm text-slate-500 max-w-sm mx-auto leading-relaxed">
                         When you buy a book with M-Pesa, your unique download link is instantly saved right here in your account profile.
                       </p>
                     </div>
                     <button
                       onClick={onBack}
-                      className="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition-transform active:scale-95 cursor-pointer"
+                      className="px-6 py-3 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition-transform active:scale-95 cursor-pointer"
                     >
                       Browse Bookstore
                     </button>
@@ -308,50 +308,50 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                             <BookCover book={item.book} size="sm" />
                           </div>
 
-                          <div className="flex-1 min-w-0 space-y-1">
+                          <div className="flex-1 min-w-0 space-y-1.5">
                             <div className="flex flex-wrap items-center gap-2">
-                              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
+                              <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-100">
                                 {item.book.category}
                               </span>
-                              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold border border-emerald-100">
+                              <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold border border-emerald-100">
                                 Receipt: {item.mpesaReceiptNumber}
                               </span>
                             </div>
 
                             <h3 
                               onClick={() => onSelectBook(item.book)}
-                              className="font-bold text-sm sm:text-base text-slate-900 truncate hover:text-blue-600 cursor-pointer pt-0.5"
+                              className="font-bold text-base sm:text-lg text-slate-900 truncate hover:text-blue-600 cursor-pointer pt-0.5"
                             >
                               {item.book.title}
                             </h3>
-                            <p className="text-xs text-slate-500 truncate">
+                            <p className="text-xs sm:text-sm text-slate-500 truncate">
                               By {item.book.author} • {item.book.fileSize} • High-Res PDF
                             </p>
-                            <p className="text-[11px] text-slate-400 font-mono">
+                            <p className="text-xs text-slate-400 font-mono">
                               Purchased: {item.purchaseDate} {item.phoneNumber ? `• Phone: ${item.phoneNumber}` : ''}
                             </p>
 
                             {/* Unique Download Link Bar */}
                             <div className="pt-2">
-                              <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-200 max-w-lg">
-                                <span className="text-[10px] font-mono uppercase text-slate-400 font-bold shrink-0">
+                              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 max-w-lg">
+                                <span className="text-xs font-mono uppercase text-slate-500 font-bold shrink-0">
                                   Unique Link:
                                 </span>
                                 <input
                                   type="text"
                                   readOnly
                                   value={item.downloadUrl}
-                                  className="text-xs font-mono text-slate-700 bg-transparent outline-none truncate w-full"
+                                  className="text-xs sm:text-sm font-mono text-slate-700 bg-transparent outline-none truncate w-full"
                                 />
                                 <button
                                   onClick={() => handleCopyLink(item)}
-                                  className="p-1 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 shrink-0 transition-colors"
+                                  className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 shrink-0 transition-colors cursor-pointer"
                                   title="Copy unique download link"
                                 >
                                   {copiedLinkId === item.id ? (
-                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <Check className="w-4 h-4 text-emerald-600" />
                                   ) : (
-                                    <Copy className="w-3.5 h-3.5" />
+                                    <Copy className="w-4 h-4" />
                                   )}
                                 </button>
                               </div>
@@ -361,20 +361,20 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                         </div>
 
                         {/* Right: Actions */}
-                        <div className="flex flex-col sm:flex-row md:flex-col gap-2 shrink-0 w-full md:w-auto">
+                        <div className="flex flex-col sm:flex-row md:flex-col gap-2.5 shrink-0 w-full md:w-auto">
                           <button
                             onClick={() => handleDownloadPDF(item)}
                             disabled={downloadingBookId === item.id}
-                            className="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2 shadow-xs transition-transform active:scale-98 cursor-pointer disabled:opacity-50"
+                            className="w-full py-3 px-5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2 shadow-xs transition-transform active:scale-98 cursor-pointer disabled:opacity-50"
                           >
                             {downloadingBookId === item.id ? (
                               <>
-                                <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                                 <span>Downloading PDF...</span>
                               </>
                             ) : (
                               <>
-                                <Download className="w-4 h-4" />
+                                <Download className="w-4.5 h-4.5" />
                                 <span>Download PDF</span>
                               </>
                             )}
@@ -382,7 +382,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
 
                           <button
                             onClick={() => onSelectBook(item.book)}
-                            className="w-full py-2 px-4 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                            className="w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                           >
                             <span>Book Overview</span>
                           </button>

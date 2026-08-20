@@ -2,7 +2,9 @@
 
 @layer base {
   :root {
-    --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", "SF Compact", -apple-system-body, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", -apple-system-body, "Segoe UI", Roboto, system-ui, sans-serif;
+    --font-subheading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-sf-mono: "SF Mono", Monaco, Menlo, Consolas, "JetBrains Mono", monospace;
   }
 
@@ -15,8 +17,10 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
+  /* Body Text → Inter Regular (400) */
   body {
-    font-family: var(--font-sf);
+    font-family: var(--font-body);
+    font-weight: 400;
     color: #0F172A;
     background-color: #F8FAFC;
     font-size: 1rem; /* 16px standard baseline */
@@ -24,15 +28,55 @@
     letter-spacing: -0.011em;
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sf);
+  /* Headings → SF Pro Display Bold (700) */
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-heading);
     letter-spacing: -0.025em;
     font-weight: 700;
   }
 
-  button, input, select, textarea {
-    font-family: var(--font-sf);
+  /* Subheadings → Outfit SemiBold (600) */
+  .font-subheading, .subheading, [data-subheading="true"] {
+    font-family: var(--font-subheading);
+    font-weight: 600;
+    letter-spacing: -0.015em;
   }
+
+  /* Body Text → Inter Regular (400) */
+  p, span, div, li, a, .font-body {
+    font-family: var(--font-body);
+  }
+
+  /* Buttons → Inter Medium (500) */
+  button, .btn, [role="button"], .font-button {
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+
+  input, select, textarea {
+    font-family: var(--font-body);
+  }
+}
+
+/* Custom font helper classes */
+.font-sf-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.font-outfit-subheading {
+  font-family: var(--font-subheading);
+  font-weight: 600;
+}
+
+.font-inter-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.font-inter-btn {
+  font-family: var(--font-body);
+  font-weight: 500;
 }
 
 /* =========================================================================

@@ -31,47 +31,47 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
           <div className="p-4 bg-emerald-600 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                   <MessageSquare className="w-5 h-5 text-white" />
                 </div>
-                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-300 border-2 border-emerald-600 animate-pulse" />
+                <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-300 border-2 border-emerald-600 animate-pulse" />
               </div>
               <div>
-                <h4 className="font-bold text-sm">Midusa WhatsApp Desk</h4>
-                <p className="text-[11px] text-emerald-100">
+                <h4 className="font-bold text-base">Midusa WhatsApp Desk</h4>
+                <p className="text-xs text-emerald-100">
                   Online • Instant Delivery
                 </p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4.5 h-4.5" />
             </button>
           </div>
 
           {/* Chat Body Bubble */}
-          <div className="p-4 space-y-3 text-xs">
-            <div className="p-3 rounded-2xl rounded-tl-none bg-slate-50 text-slate-700 border border-slate-200 leading-relaxed">
-              <p className="font-semibold text-emerald-700 mb-1 flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5" />
+          <div className="p-4 space-y-3.5 text-sm">
+            <div className="p-3.5 rounded-2xl rounded-tl-none bg-slate-50 text-slate-700 border border-slate-200 leading-relaxed">
+              <p className="font-semibold text-emerald-700 mb-1 flex items-center gap-1.5 text-sm">
+                <Sparkles className="w-4 h-4" />
                 Hello Book Lover! 📚
               </p>
               Order any eBook directly through WhatsApp for instant PDF delivery and local payment (M-Pesa, Card, PayPal).
             </div>
 
             {/* Quick Prompt Buttons */}
-            <div className="space-y-1.5 pt-0.5">
+            <div className="space-y-2 pt-0.5">
               <button
                 onClick={() => setCustomMsg('Hello MidusaElibrary, I would like to purchase this book.')}
-                className="w-full text-left p-2 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-slate-700 text-[11px] transition-colors"
+                className="w-full text-left p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-slate-700 text-xs sm:text-sm transition-colors cursor-pointer"
               >
                 📖 "I would like to purchase this book."
               </button>
               <button
                 onClick={() => setCustomMsg('Hello MidusaElibrary, how does instant download work on Kindle and iPad?')}
-                className="w-full text-left p-2 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-slate-700 text-[11px] transition-colors"
+                className="w-full text-left p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-slate-700 text-xs sm:text-sm transition-colors cursor-pointer"
               >
                 📱 "How does instant download work on Kindle?"
               </button>
@@ -83,13 +83,13 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
                 rows={2}
                 value={customMsg}
                 onChange={(e) => setCustomMsg(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-emerald-500 resize-none"
+                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-emerald-500 resize-none"
               />
               <button
                 onClick={handleSend}
-                className="w-full mt-2 py-2 px-4 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95"
+                className="w-full mt-2.5 py-3 px-4 rounded-xl font-bold text-sm bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95 cursor-pointer"
               >
-                <Send className="w-3.5 h-3.5" />
+                <Send className="w-4 h-4" />
                 <span>Open in WhatsApp</span>
               </button>
             </div>
